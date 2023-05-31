@@ -7,4 +7,4 @@ nltk
 matplotlib
 seaborn
 gdown
-zipFile
+zipfile
