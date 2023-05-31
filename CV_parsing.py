@@ -159,8 +159,8 @@ def main():
 
     if result and uploaded_files is not None:
 
-        model_url = "https://drive.google.com/uc?id=1BsV3n-1Qzncf0ePgWtxLPcXoOxS_bnVP" 
-        output_file = "model.zip"
+        model_url = "https://drive.google.com/file/d/1vUuQpsl-MfsE3m9VELI-0I53qCqXo_bm/view?usp=share_link" 
+        output_file = "model-best.zip"
         gdown.download(model_url, output_file, quiet=False)
 
         with zipfile.ZipFile(output_file, "r") as zip_ref:
