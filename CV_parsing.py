@@ -159,7 +159,7 @@ def main():
 
     if result and uploaded_files is not None:
 
-        model_url = "https://drive.google.com/uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO" 
+        model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO" 
         output_file = "model-best.zip"
         gdown.download(model_url, output_file, quiet=False)
 
