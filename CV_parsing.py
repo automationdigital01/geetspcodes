@@ -9,7 +9,7 @@ from nltk import ne_chunk, pos_tag, word_tokenize, download
 from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import PyPDF2
 
 def extract_names(txt):
     person_names = []
@@ -155,6 +155,10 @@ def perform_education_analysis(df):
 def main():
     st.title("Resume Parser")
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
+      
+    option = st.selectbox('file type',('text','pdf'))
+    if option=='pdf':
+        
     result = st.button("Get result")
 
     if result and uploaded_files is not None:
