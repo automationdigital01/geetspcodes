@@ -9,7 +9,7 @@ from nltk import ne_chunk, pos_tag, word_tokenize, download
 from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
-#import PyPDF2
+import PyPDF2
 
 def extract_names(txt):
     person_names = []
@@ -151,17 +151,29 @@ def perform_education_analysis(df):
     plt.pie(counts, labels=education_levels, colors=sns.color_palette('cool'), autopct='%.0f%%')
     plt.title('Education Level Distribution')
     st.pyplot()
+    
+def pdf_totext(file):
+    with open(file, 'rb') as f:
+        read=PyPDF2.PdfReader(f)
+        pagenum=len(read.pages)
+        page_content=read.pages[0]
+        text=page_content.extract_text()
+     return text   
 
 def main():
     st.title("Resume Parser")
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
-      
-    #option = st.selectbox('file type',('text','pdf'))
-    #if option=='pdf':
+    
+    option = st.selectbox('file type',('text','pdf'))
+    if option=='pdf':
+        for file in uploaded_files:
+            files=pdf_totext(file)
+    else:
+        files=uploaded_files
         
     result = st.button("Get result")
 
-    if result and uploaded_files is not None:
+    if result and files is not None:
 
         model_url = "https://drive.google.com/uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO"   
         output_file = "model-best.zip"
@@ -191,7 +203,7 @@ def main():
         df = predict(uploaded_files, nlp, skills)
 
         st.write("Parsed Resumes:")
-        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]], height=len(df))
+        st.dataframe(df[[ "Name","Email", "Phone Number","Roles","Education",  "Degree", "Skills"]], height=len(df))
         perform_education_analysis(df)
         
         
