@@ -154,7 +154,7 @@ def predict(filepaths, nlp, skills):
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def perform_education_analysis(df):
-    roles_counts = df['roles'].value_counts()
+    roles_counts = df['Roles'].value_counts()
 
  
     roles_levels = roles_counts.index.tolist()
