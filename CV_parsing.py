@@ -142,14 +142,14 @@ def perform_education_analysis(df):
     plt.figure(figsize=(12, 8))
     sns.barplot(x=counts, y=education_levels, palette='cool')
     plt.xlabel('Count')
-    plt.ylabel('Education Level')
-    plt.title('Education Level Distribution')
+    plt.ylabel('Roles Level')
+    plt.title('Roles Distribution')
     st.pyplot() 
 
     # Plot the pie chart
     plt.figure(figsize=(12, 8))
     plt.pie(counts, labels=education_levels, colors=sns.color_palette('cool'), autopct='%.0f%%')
-    plt.title('Education Level Distribution')
+    plt.title('Roles Distribution')
     st.pyplot()
 
 def main():
