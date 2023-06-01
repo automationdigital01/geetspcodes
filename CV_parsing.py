@@ -52,7 +52,7 @@ def extract_education(txt):
     extracted_education = []
     
     for idx in education:
-        if degree.lower() in txt.lower():
+        if idx.lower() in txt.lower():
             extracted_education.append(idx)
     
     return extracted_education
