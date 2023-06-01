@@ -40,23 +40,36 @@ def extract_skills(txt, skills, nlp):
         skill_set.add(skill)
     return list(skill_set)
 
+def extract_education(txt):
+    education=[
+        'chemical engineering',
+        'computer science engineering',
+        'mechanical engineering',
+        'electrical engineering',
+        'civil engineering',
+        'LLB',
+        'CA']
+     extracted_education = []
+    
+    for idx in education:
+        if degree.lower() in txt.lower():
+            extracted_education.append(idx)
+    
+    return extracted_education
+
 def extract_degree(txt):
-    degrees = [
-       
-        "M.Tech Chemical",
-        "BE Chemical",
-        "BTech",
-        "B. Tech",
-        "M.Chem.Engg.",
-        "B.E (Chemical)",
-        "B.E(EEE)",
-        "Bachelor of Technology - Chemical Engineering" ,
-        "B.E. Mechanical",
-        "B.E. MECHANICAL",
-        "Mtech",
-        "B. Tech/B. E In Electrical and Electronics Engineering",
-        "B.E. -Chemical Engineering",
-        "Postgraduate"
+    degrees = [       
+        'Btech',
+        'BE',
+        'Mtech',
+        'MS',
+        'BSc',
+        'MSc',
+        'Diploma',
+        'Phd',
+        'LLB',
+        'BA-LLB',
+        'CA'
     ]
     
     extracted_degrees = []
@@ -114,6 +127,11 @@ def predict(filepaths, nlp, skills):
             extracted_degrees = extract_degree(file_contents)
             if extracted_degrees:
                 degree = extracted_degrees[0]
+                
+         if education is None or education == "NA":
+            extracted_education = extract_education(file_contents)
+            if extracted_education:
+                degree = extracted_education[0]       
 
         extracted_skills = extract_skills(file_contents, skills, nlp)
 
