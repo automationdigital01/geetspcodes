@@ -9,7 +9,7 @@ from nltk import ne_chunk, pos_tag, word_tokenize, download
 from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
-import PyPDF2
+#import PyPDF2
 
 def extract_names(txt):
     person_names = []
@@ -156,15 +156,15 @@ def main():
     st.title("Resume Parser")
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
       
-    option = st.selectbox('file type',('text','pdf'))
-    if option=='pdf':
+    #option = st.selectbox('file type',('text','pdf'))
+    #if option=='pdf':
         
     result = st.button("Get result")
 
     if result and uploaded_files is not None:
 
-        model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO" 
-        output_file = "model-best.zip"
+        model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO"  
+        output_file = "model.zip"
         gdown.download(model_url, output_file, quiet=False)
 
         with zipfile.ZipFile(output_file, "r") as zip_ref:
