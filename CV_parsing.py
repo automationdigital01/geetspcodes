@@ -49,7 +49,7 @@ def extract_education(txt):
         'civil engineering',
         'LLB',
         'CA']
-     extracted_education = []
+    extracted_education = []
     
     for idx in education:
         if degree.lower() in txt.lower():
