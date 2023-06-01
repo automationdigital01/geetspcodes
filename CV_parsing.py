@@ -154,15 +154,15 @@ def predict(filepaths, nlp, skills):
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def perform_education_analysis(df):
-    education_counts = df['Education'].value_counts()
+    roles_counts = df['roles'].value_counts()
 
  
-    education_levels = education_counts.index.tolist()
-    counts = education_counts.values.tolist()
+    roles_levels = roles_counts.index.tolist()
+    counts = roles_counts.values.tolist()
 
     # Plot the bar chart
     plt.figure(figsize=(12, 8))
-    sns.barplot(x=counts, y=education_levels, palette='cool')
+    sns.barplot(x=counts, y=roles_levels, palette='cool')
     plt.xlabel('Count')
     plt.ylabel('Roles Level')
     plt.title('Roles Distribution')
@@ -170,7 +170,7 @@ def perform_education_analysis(df):
 
     # Plot the pie chart
     plt.figure(figsize=(12, 8))
-    plt.pie(counts, labels=education_levels, colors=sns.color_palette('cool'), autopct='%.0f%%')
+    plt.pie(counts, labels=roles_levels, colors=sns.color_palette('cool'), autopct='%.0f%%')
     plt.title('Roles Distribution')
     st.pyplot()
 
