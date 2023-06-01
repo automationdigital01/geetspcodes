@@ -6,3 +6,4 @@ spacy==3.5.1
 nltk
 matplotlib
 seaborn
+PyPDF2
