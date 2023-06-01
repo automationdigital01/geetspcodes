@@ -41,23 +41,17 @@ def extract_skills(txt, skills, nlp):
     return list(skill_set)
 
 def extract_degree(txt):
-    degrees = [
-       
-        "M.Tech Chemical",
-        "BE Chemical",
-        "BTech",
-        "B. Tech",
-        "M.Chem.Engg.",
-        "B.E (Chemical)",
-        "B.E(EEE)",
-        "Bachelor of Technology - Chemical Engineering" ,
-        "B.E. Mechanical",
-        "B.E. MECHANICAL",
-        "Mtech",
-        "B. Tech/B. E In Electrical and Electronics Engineering",
-        "B.E. -Chemical Engineering",
-        "Postgraduate"
-    ]
+    degrees = ['Btech',
+               'BE',
+               'Mtech',
+               'MS',
+               'BSc',
+               'MSc',
+               'Diploma',
+               'Phd',
+               'LLB',
+               'BA-LLB',
+               'CA']
     
     extracted_degrees = []
     
@@ -158,12 +152,11 @@ def pdf_totext(file):
         pagenum=len(read.pages)
         page_content=read.pages[0]
         text=page_content.extract_text()
-     return text   
+        return text   
 
 def main():
     st.title("Resume Parser")
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
-    
     option = st.selectbox('file type',('text','pdf'))
     if option=='pdf':
         for file in uploaded_files:
