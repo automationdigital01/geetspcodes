@@ -168,9 +168,9 @@ def main():
         gdown.download(model_url, output_file, quiet=False)
 
         with zipfile.ZipFile(output_file, "r") as zip_ref:
-            zip_ref.extractall("model")
+            zip_ref.extractall("model-best")
 
-        model_path = "./model"
+        model_path = "./model-best"
         nlp = spacy.load(model_path)
 
         skills = [
