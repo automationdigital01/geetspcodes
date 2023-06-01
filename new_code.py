@@ -9,7 +9,7 @@ from nltk import ne_chunk, pos_tag, word_tokenize, download
 from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
-import PyPDF2
+
 
 def extract_names(txt):
     person_names = []
@@ -41,22 +41,18 @@ def extract_skills(txt, skills, nlp):
     return list(skill_set)
 
 def extract_degree(txt):
-    degrees = [
-       
-        "M.Tech Chemical",
-        "BE Chemical",
-        "BTech",
-        "B. Tech",
-        "M.Chem.Engg.",
-        "B.E (Chemical)",
-        "B.E(EEE)",
-        "Bachelor of Technology - Chemical Engineering" ,
-        "B.E. Mechanical",
-        "B.E. MECHANICAL",
-        "Mtech",
-        "B. Tech/B. E In Electrical and Electronics Engineering",
-        "B.E. -Chemical Engineering",
-        "Postgraduate"
+    degrees = [       
+        'Btech',
+        'BE',
+        'Mtech',
+        'MS',
+        'BSc',
+        'MSc',
+        'Diploma',
+        'Phd',
+        'LLB',
+        'BA-LLB',
+        'CA'
     ]
     
     extracted_degrees = []
@@ -71,7 +67,7 @@ def predict(filepaths, nlp, skills):
     entities_list = []
 
     for filepath in filepaths:
-        file_contents = filepath.read().decode('utf-8')
+        file_contents = filepath.read().decode('utf-8').
         email = None
         name = None
         roles = None
@@ -154,10 +150,11 @@ def perform_education_analysis(df):
 
 def main():
     st.title("Resume Parser")
-    uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True, type="pdf")
       
-    option = st.selectbox('file type',('text','pdf'))
+   # option = st.selectbox('file type',('text','pdf'))
     #if option=='pdf':
+     #   uploaded
         
     result = st.button("Get result")
 
