@@ -1,7 +1,7 @@
 import streamlit as st
 import PyPDF2
 # Display a file uploader widget
-uploaded_files = st.file_uploader("Upload PDF file", accept_multiple_files=True)
+uploaded_files = st.file_uploader("Upload PDF file", accept_multiple_files=True, type="pdf")
 def show_pdf(file_path):
     with open(file_path,"rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
