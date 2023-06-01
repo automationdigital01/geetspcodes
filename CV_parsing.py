@@ -48,7 +48,10 @@ def extract_education(txt):
         'electrical engineering',
         'civil engineering',
         'LLB',
-        'CA']
+        'CA',
+        'Law',
+        'engineering'
+    ]
     extracted_education = []
     
     for idx in education:
@@ -69,7 +72,8 @@ def extract_degree(txt):
         'Phd',
         'LLB',
         'BA-LLB',
-        'CA'
+        'CA',
+        'MBA'
     ]
     
     extracted_degrees = []
