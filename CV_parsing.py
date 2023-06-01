@@ -128,7 +128,7 @@ def predict(filepaths, nlp, skills):
             if extracted_degrees:
                 degree = extracted_degrees[0]
                 
-         if education is None or education == "NA":
+        if education is None or education == "NA":
             extracted_education = extract_education(file_contents)
             if extracted_education:
                 degree = extracted_education[0]       
