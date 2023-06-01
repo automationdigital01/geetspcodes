@@ -191,7 +191,7 @@ def main():
         df = predict(uploaded_files, nlp, skills)
 
         st.write("Parsed Resumes:")
-        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]], height=len(df))
+        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
         perform_education_analysis(df)
         
         
