@@ -223,16 +223,16 @@ def main():
 
         model_path = "./model"
         nlp = spacy.load(model_path)
+        text=[]
 
         for uploaded_file in uploaded_files:
             if uploaded_file.name.endswith(".pdf"):
-                text = read_pdf_with_pdfplumber(uploaded_file)
-                st.write(text)
-                df = predict(text, nlp)
+                pdf_contents = read_pdf_with_pdfplumber(uploaded_file)
+                text=text.append(pdf_contents)
             else:
-                text = uploaded_file
-                st.write(text)
-                df = predict(text, nlp)
+                text = text.append(uploaded_file)
+                       
+         df = predict(text, nlp)
 
             st.write("Parsed Resumes:")
             st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
