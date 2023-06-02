@@ -233,7 +233,6 @@ def main():
 
         model_path = "./model"
         nlp = spacy.load(model_path)
-	
 	if option=='pdf':
 		for uploaded_file in uploaded_files:
 			text=read_pdf_with_pdfplumber(uploaded_file)
