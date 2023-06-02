@@ -10,6 +10,7 @@ from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pdfplumber
+import io 
 
 def read_pdf_with_pdfplumber(file):
     with pdfplumber.open(file) as pdf:
@@ -116,7 +117,9 @@ def predict(filepaths, nlp):
     entities_list = []
 
     for filepath in filepaths:
-        file_contents = filepath.decode('UTF-8').splitlines()
+        with io.open(filepath,'r',encoding='utf-8') as f:
+            file_contents=f
+        #file_contents = filepath.decode('UTF-8').splitlines()
         email = None
         name = None
         roles = None
