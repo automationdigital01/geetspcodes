@@ -219,7 +219,7 @@ def perform_education_analysis(df):
 def main():
     st.title("Resume Parser")
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
-    option = st.selectbox('file type',('text','pdf'))
+    #option = st.selectbox('file type',('text','pdf'))
     result = st.button("Get result")
 	
     if result and uploaded_files is not None:
@@ -233,13 +233,13 @@ def main():
 
         model_path = "./model"
         nlp = spacy.load(model_path)
-	if option=='pdf':
-		for uploaded_file in uploaded_files:
+	for uploaded_file in uploaded_files:
+		if uploaded_file.endswith('.pdf'):
 			text=read_pdf_with_pdfplumber(uploaded_file)
 			df = predict(text, nlp)
-	if option=='text':
-		text=uploaded_files
-		df=predict(text,nlp)
+		else:
+			text=uploaded_files
+			df=predict(text,nlp)
         
        
       
