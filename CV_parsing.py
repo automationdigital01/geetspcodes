@@ -9,7 +9,12 @@ from nltk import ne_chunk, pos_tag, word_tokenize, download
 from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
-#import PyPDF2
+import pdfplumber
+
+def read_pdf_with_pdfplumber(file):
+	with pdfplumber.open(file) as pdf:
+	    page = pdf.pages[0]
+	    return page.extract_text()
 
 def extract_names(txt):
     person_names = []
@@ -84,7 +89,30 @@ def extract_degree(txt):
     
     return extracted_degrees
 
-def predict(filepaths, nlp, skills):
+def extract_skills(txt):
+    skills = [
+            "SAP",
+            "STAAD PRO.",
+            "Mat3D",
+            "AutoCAD",
+            "TEKLA Viewer",
+            "Mathcad",
+            "MS Office",
+            "python",
+            "oracle",
+            "HYSYS-3.2",
+            "HTRI-6.0",
+            "ASPEN"
+        ]
+    
+    extracted_skills = []
+    
+    for skill in skills:
+        if skill.lower() in txt.lower():
+            extracted_skills.append(degree)
+    
+    return extracted_degrees
+def predict(filepaths, nlp):
     entities_list = []
 
     for filepath in filepaths:
@@ -95,7 +123,8 @@ def predict(filepaths, nlp, skills):
         education = None
         phone_number = None
         degree = None
-        extracted_skills = []
+        skills= None
+        
 
         doc = nlp(file_contents)
         for ent in doc.ents:
@@ -111,6 +140,9 @@ def predict(filepaths, nlp, skills):
                 phone_number = ent.text
             elif ent.label_ == "DEGREE" and degree is None:
                 degree = ent.text
+            elif ent.label_ == "SKILLS" and skills is None:
+                skills = ent.text
+    
 
         if email is None:
             extracted_emails = extract_emails(file_contents)
@@ -135,9 +167,14 @@ def predict(filepaths, nlp, skills):
         if education is None or education == "NA":
             extracted_education = extract_education(file_contents)
             if extracted_education:
-                degree = extracted_education[0]       
+                degree = extracted_education[0] 
+                
+        if skills is None or skills == "NA":
+            extracted_skills = extract_skills(file_contents)
+            if extracted_skills:
+                skills = extracted_skills[0]             
 
-        extracted_skills = extract_skills(file_contents, skills, nlp)
+        
 
         entities_list.append({
             "Email": email,
@@ -146,7 +183,7 @@ def predict(filepaths, nlp, skills):
             "Education": education,
             "Phone Number": phone_number,
             "Degree": degree,
-            "Skills": extracted_skills
+            "Skills": skills
         })
 
     return pd.DataFrame(entities_list)
@@ -175,44 +212,36 @@ def perform_education_analysis(df):
     plt.title('Education Distribution')
     st.pyplot()
 
+    
+def upload_model():
+    model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO"   
+    output_file = "model-best.zip"
+    gdown.download(model_url, output_file, quiet=False)
+    with zipfile.ZipFile(output_file, "r") as zip_ref:
+            zip_ref.extractall("model-best")
+    model_path = "./model-best"
+    nlp = spacy.load(model_path)
+    
 def main():
     st.title("Resume Parser")
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
       
-    #option = st.selectbox('file type',('text','pdf'))
-    #if option=='pdf':
-        
+    option = st.selectbox('file type',('text','pdf'))
     result = st.button("Get result")
-
     if result and uploaded_files is not None:
-
-        model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO"   
-        output_file = "model-best.zip"
-        gdown.download(model_url, output_file, quiet=False)
-
-        with zipfile.ZipFile(output_file, "r") as zip_ref:
-            zip_ref.extractall("model-best")
-
-        model_path = "./model-best"
-        nlp = spacy.load(model_path)
-
-        skills = [
-            "SAP",
-            "STAAD PRO.",
-            "Mat3D",
-            "AutoCAD",
-            "TEKLA Viewer",
-            "Mathcad",
-            "MS Office",
-            "python",
-            "oracle",
-            "HYSYS-3.2",
-            "HTRI-6.0",
-            "ASPEN"
-        ]
-
-        df = predict(uploaded_files, nlp, skills)
-
+        upload_model()
+        if option=='pdf':
+            for uploaded_file in uploaded_files:
+                text=read_pdf_with_pdfplumber(uploaded_file)
+                df = predict(text, nlp)
+           
+         if option=='text':
+                text=uploaded_files
+                df=predict(text,nlp)
+        
+       
+      
+       
         st.write("Parsed Resumes:")
         st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
         perform_education_analysis(df)
