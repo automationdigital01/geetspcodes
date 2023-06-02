@@ -12,9 +12,9 @@ import seaborn as sns
 import pdfplumber
 
 def read_pdf_with_pdfplumber(file):
-	with pdfplumber.open(file) as pdf:
-	    page = pdf.pages[0]
-	    return page.extract_text()
+    with pdfplumber.open(file) as pdf:
+        page = pdf.pages[0]
+        return page.extract_text()
 
 def extract_names(txt):
     person_names = []
@@ -234,7 +234,7 @@ def main():
         nlp = spacy.load(model_path)
 
         for uploaded_file in uploaded_files:
-	    if uploaded_file.endswith('.pdf'):
+            if uploaded_file.endswith('.pdf'):
                 text = read_pdf_with_pdfplumber(uploaded_file)
                 df = predict(text, nlp)
             else:
