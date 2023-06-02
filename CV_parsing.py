@@ -234,7 +234,7 @@ def main():
         nlp = spacy.load(model_path)
 
         for uploaded_file in uploaded_files:
-		st.write(uploaded_file)
+	    st.write(uploaded_file)
             if uploaded_file.endswith('.pdf'):
                 text = read_pdf_with_pdfplumber(uploaded_file)
                 df = predict(text, nlp)
