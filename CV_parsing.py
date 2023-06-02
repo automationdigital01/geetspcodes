@@ -105,8 +105,8 @@ def predict(filepaths, nlp):
     entities_list = []
 
     for filepath in filepaths:
-        file_contents=filepath
-        #file_contents = filepath.decode('UTF-8').splitlines()
+        #file_contents=filepath
+        file_contents = filepath.read().decode('utf-8')
         email = None
         name = None
         roles = None
