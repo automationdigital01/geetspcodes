@@ -34,18 +34,6 @@ def get_phone_numbers(txt):
     phone_numbers = r.findall(txt)
     return [re.sub(r'\D', '', num) for num in phone_numbers]
 
-def extract_skills(txt, skills, nlp):
-    skill_set = set()
-    matcher = PhraseMatcher(nlp.vocab)
-    patterns = [nlp(skill) for skill in skills]
-    matcher.add("SKILLS", None, *patterns)
-    doc = nlp(txt)
-    matches = matcher(doc)
-    for match_id, start, end in matches:
-        skill = doc[start:end].text
-        skill_set.add(skill)
-    return list(skill_set)
-
 def extract_education(txt):
     education=[
         'chemical engineering',
