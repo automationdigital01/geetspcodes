@@ -229,14 +229,14 @@ def main():
     option = st.selectbox('file type',('text','pdf'))
     result = st.button("Get result")
     if result and uploaded_files is not None:
-		upload_model()
-                if option=='pdf':
-			for uploaded_file in uploaded_files:
-				text=read_pdf_with_pdfplumber(uploaded_file)
-                                df = predict(text, nlp)
-                if option=='text':
-		        text=uploaded_files
-                        df=predict(text,nlp)
+       upload_model()
+       if option=='pdf':
+	  for uploaded_file in uploaded_files:
+	      text=read_pdf_with_pdfplumber(uploaded_file)
+              df = predict(text, nlp)
+       if option=='text':
+	  text=uploaded_files
+          df=predict(text,nlp)
         
        
       
