@@ -236,10 +236,12 @@ def main():
         for uploaded_file in uploaded_files:
             if uploaded_file.endswith('.pdf'):
                 text = read_pdf_with_pdfplumber(uploaded_file)
-                df = predict(text, nlp)
+                st.write(text)
+                #df = predict(text, nlp)
             else:
                 text = uploaded_file
-                df = predict(text, nlp)
+                st.write(text)
+                #df = predict(text, nlp)
 
             st.write("Parsed Resumes:")
             st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
