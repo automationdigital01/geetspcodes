@@ -232,11 +232,11 @@ def main():
             else:
                 text = text.append(uploaded_file)
                        
-         df = predict(text, nlp)
+        df = predict(text, nlp)
 
-            st.write("Parsed Resumes:")
-            st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-            perform_education_analysis(df)
+        st.write("Parsed Resumes:")
+        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+        perform_education_analysis(df)
 
 
 
