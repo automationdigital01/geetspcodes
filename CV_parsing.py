@@ -221,9 +221,8 @@ def main():
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
     #option = st.selectbox('file type',('text','pdf'))
     result = st.button("Get result")
-	
-    if result and uploaded_files is not None:
 
+    if result and uploaded_files is not None:
         model_url = "https://drive.google.com/uc?id=1BsV3n-1Qzncf0ePgWtxLPcXoOxS_bnVP" 
         output_file = "model.zip"
         gdown.download(model_url, output_file, quiet=False)
@@ -233,22 +232,20 @@ def main():
 
         model_path = "./model"
         nlp = spacy.load(model_path)
-	for uploaded_file in uploaded_files:
-		if uploaded_file.endswith('.pdf'):
-			text=read_pdf_with_pdfplumber(uploaded_file)
-			df = predict(text, nlp)
-		else:
-			text=uploaded_file
-			df=predict(text,nlp)
-        
-       
-      
-       
-        st.write("Parsed Resumes:")
-        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-        perform_education_analysis(df)
-        
-        
+
+        for uploaded_file in uploaded_files:
+            if uploaded_file.endswith('.pdf'):
+                text = read_pdf_with_pdfplumber(uploaded_file)
+                df = predict(text, nlp)
+            else:
+                text = uploaded_file
+                df = predict(text, nlp)
+
+            st.write("Parsed Resumes:")
+            st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+            perform_education_analysis(df)
+
+
 
 if __name__ == "__main__":
     download('words')
