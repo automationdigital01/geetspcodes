@@ -106,7 +106,7 @@ def predict(filepaths, nlp):
 
     for filepath in filepaths:
         #file_contents=filepath
-        file_contents = filepath.read().decode('utf-8')
+        file_contents = filepath.decode('utf-8')
         email = None
         name = None
         roles = None
