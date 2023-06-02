@@ -213,14 +213,8 @@ def perform_education_analysis(df):
     st.pyplot()
 
     
-def upload_model():
-    model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO"   
-    output_file = "model-best.zip"
-    gdown.download(model_url, output_file, quiet=False)
-    with zipfile.ZipFile(output_file, "r") as zip_ref:
-            zip_ref.extractall("model-best")
-    model_path = "./model-best"
-    nlp = spacy.load(model_path)
+
+    
     
 def main():
     st.title("Resume Parser")
@@ -228,7 +222,13 @@ def main():
     option = st.selectbox('file type',('text','pdf'))
     result = st.button("Get result")
     if result and uploaded_files is not None:
-	upload_model()
+	model_url = "https://drive.google.com//uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO"   
+        output_file = "model-best.zip"
+        gdown.download(model_url, output_file, quiet=False)
+        with zipfile.ZipFile(output_file, "r") as zip_ref:
+		zip_ref.extractall("model-best")
+        model_path = "./model-best"
+        nlp = spacy.load(model_path)
 	if option=='pdf':
 		for uploaded_file in uploaded_files:
 			text=read_pdf_with_pdfplumber(uploaded_file)
