@@ -235,9 +235,9 @@ def main():
                 text=read_pdf_with_pdfplumber(uploaded_file)
                 df = predict(text, nlp)
            
-         if option=='text':
-                text=uploaded_files
-                df=predict(text,nlp)
+        if option=='text':
+	    text=uploaded_files
+            df=predict(text,nlp)
         
        
       
