@@ -100,7 +100,8 @@ def extract_skills(txt):
         if skill.lower() in txt.lower():
             extracted_skills.append(degree)
     
-    return extracted_degrees
+    return extracted_skills
+
 def predict(filepaths, nlp):
     entities_list = []
 
