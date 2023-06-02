@@ -233,12 +233,13 @@ def main():
 
         model_path = "./model"
         nlp = spacy.load(model_path)
+	
 	for uploaded_file in uploaded_files:
 		if uploaded_file.endswith('.pdf'):
 			text=read_pdf_with_pdfplumber(uploaded_file)
 			df = predict(text, nlp)
 		else:
-			text=uploaded_files
+			text=uploaded_file
 			df=predict(text,nlp)
         
        
