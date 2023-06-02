@@ -223,30 +223,29 @@ def main():
     result = st.button("Get result")
 
     if result and uploaded_files is not None:
-    model_url = "https://drive.google.com/uc?id=1BsV3n-1Qzncf0ePgWtxLPcXoOxS_bnVP" 
-    output_file = "model.zip"
-    gdown.download(model_url, output_file, quiet=False)
+        model_url = "https://drive.google.com/uc?id=1BsV3n-1Qzncf0ePgWtxLPcXoOxS_bnVP" 
+        output_file = "model.zip"
+        gdown.download(model_url, output_file, quiet=False)
 
-    with zipfile.ZipFile(output_file, "r") as zip_ref:
-        zip_ref.extractall("model")
+        with zipfile.ZipFile(output_file, "r") as zip_ref:
+            zip_ref.extractall("model")
 
-    model_path = "./model"
-    nlp = spacy.load(model_path)
+        model_path = "./model"
+        nlp = spacy.load(model_path)
 
-    for uploaded_file in uploaded_files:
-        if uploaded_file.name.endswith(".pdf"):
-            text = read_pdf_with_pdfplumber(uploaded_file)
-            st.write(text)
-            df = predict([text], nlp) 
-        else:
-            text = uploaded_file.read().decode('utf-8')  
-            st.write(text)
-            df = predict([text], nlp) 
+        for uploaded_file in uploaded_files:
+            if uploaded_file.name.endswith(".pdf"):
+                text = read_pdf_with_pdfplumber(uploaded_file)
+                st.write(text)
+                df = predict(text, nlp)
+            else:
+                text = uploaded_file
+                st.write(text)
+                df = predict(text, nlp)
 
-        st.write("Parsed Resumes:")
-        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-        perform_education_analysis(df)
-
+            st.write("Parsed Resumes:")
+            st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+            perform_education_analysis(df)
 
 
 
