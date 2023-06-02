@@ -7,3 +7,4 @@ nltk
 matplotlib
 seaborn
 PyPDF2
+pdfplumber
