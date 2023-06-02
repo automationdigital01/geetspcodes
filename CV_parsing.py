@@ -98,7 +98,7 @@ def extract_skills(txt):
     
     for skill in skills:
         if skill.lower() in txt.lower():
-            extracted_skills.append(degree)
+            extracted_skills.append(skills)
     
     return extracted_skills
 
