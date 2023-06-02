@@ -1,6 +1,7 @@
 import streamlit as st
 #import PyPDF2
-from PyPDF2 import PdfFileReader 
+#from PyPDF2 import PdfFileReader 
+import pdfplumber
 # Display a file uploader widget
 uploaded_files = st.file_uploader("Upload PDF file", accept_multiple_files=True, type="pdf")
 def read_pdf(file):
@@ -13,6 +14,11 @@ def read_pdf(file):
 
 	return all_page_text
 
+def read_pdf_with_pdfplumber(file):
+	with pdfplumber.open(file) as pdf:
+	    page = pdf.pages[0]
+	    return page.extract_text()
+
 # Check if files have been uploaded
 if uploaded_files:
     st.write("Uploaded files:")
@@ -20,7 +26,7 @@ if uploaded_files:
     # Iterate through the uploaded files
     for uploaded_file in uploaded_files:
         # Read the file contents
-        file_contents = read_pdf(uploaded_file)
+        file_contents = read_pdf_with_pdfplumber(uploaded_file)
 
         # Display the file name and contents
         st.write("File name:", uploaded_file.name)
