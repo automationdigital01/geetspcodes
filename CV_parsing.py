@@ -251,8 +251,8 @@ def main():
         st.write("Parsed Resumes:")
         st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
         perform_education_analysis(df)
-        df_xlsx = to_excel(df)
-     st.download_button(label='📥 Download Current Result',data=df_xlsx ,file_name= 'df_test.xlsx')   
+    df_xlsx = to_excel(df)
+    st.download_button(label='📥 Download Current Result',data=df_xlsx ,file_name= 'df_test.xlsx')   
 
 
 
