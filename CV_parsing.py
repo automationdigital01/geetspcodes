@@ -195,12 +195,12 @@ def perform_education_analysis(df):
     st.pyplot() 
 
     # Plot the pie chart
-    education_counts = df['Education'].value_counts()
-    education_levels = education_counts.index.tolist()
-    ecounts = education_counts.values.tolist()
+    #roles_counts = df['Roles'].value_counts()
+    #education_levels = education_counts.index.tolist()
+    #ecounts = education_counts.values.tolist()
     plt.figure(figsize=(12, 8))
-    plt.pie(ecounts, labels=education_levels, colors=sns.color_palette('cool'), autopct='%.0f%%')
-    plt.title('Education Distribution')
+    plt.pie(ecounts, labels=roles_levels, colors=sns.color_palette('cool'), autopct='%.0f%%')
+    plt.title('Roles Distribution')
     st.pyplot()
 
     
