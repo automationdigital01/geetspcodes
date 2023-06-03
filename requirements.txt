@@ -8,5 +8,4 @@ matplotlib
 seaborn
 PyPDF2
 pdfplumber
-pyxlsb==1.0.10
-io
+
