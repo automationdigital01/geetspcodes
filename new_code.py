@@ -117,5 +117,5 @@ def main():
         perform_education_analysis(df)
 
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
         main()
