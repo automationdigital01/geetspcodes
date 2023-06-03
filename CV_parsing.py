@@ -229,9 +229,9 @@ def main():
         for uploaded_file in uploaded_files:
             if uploaded_file.name.endswith(".pdf"):
                 pdf_contents = read_pdf_with_pdfplumber(uploaded_file)
-                text=text.append(pdf_contents)
+                text.append(pdf_contents)
             else:
-                text = text.append(uploaded_file)
+                text.append(uploaded_file)
                        
         df = predict(text, nlp)
 
