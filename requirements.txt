@@ -8,4 +8,4 @@ matplotlib
 seaborn
 PyPDF2
 pdfplumber
-pyarrow==0.14.1
+
