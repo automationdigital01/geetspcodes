@@ -204,7 +204,10 @@ def perform_education_analysis(df):
     plt.title('Roles Distribution')
     st.pyplot()
 
-    
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')    
 
     
     
@@ -243,6 +246,14 @@ def main():
         perform_education_analysis(df)
     
 
+
+   csv = convert_df(df)
+
+   st.download_button(label="Download data as CSV",
+                      data=csv,
+                      file_name='cv_df.csv',
+                      mime='text/csv',
+                     )
 
 
 if __name__ == "__main__":
