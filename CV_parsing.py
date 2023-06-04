@@ -247,9 +247,9 @@ def main():
     
 
 
-   csv = convert_df(df)
+    csv = convert_df(df)
 
-   st.download_button(label="Download data as CSV",
+    st.download_button(label="Download data as CSV",
                       data=csv,
                       file_name='cv_df.csv',
                       mime='text/csv',
