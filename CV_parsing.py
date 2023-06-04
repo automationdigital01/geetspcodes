@@ -10,7 +10,7 @@ from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pdfplumber
-
+import 
 
 
 def read_pdf_with_pdfplumber(file):
@@ -235,6 +235,8 @@ def main():
                 text.append(uploaded_file)
                        
         df = predict(text, nlp)
+        df=df.astypr(str)
+        df.to_feather('df')
 
         st.write("Parsed Resumes:")
         st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
