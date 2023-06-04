@@ -235,7 +235,7 @@ def main():
                 text.append(uploaded_file)
                        
         df = predict(text, nlp)
-        df=df.astypr(str)
+        df=df.astype(str)
         df.to_feather('df')
 
         st.write("Parsed Resumes:")
