@@ -252,10 +252,7 @@ def main():
                            file_name='cv_df.csv',
                            mime='text/csv',)
                                
-
-
-    
-
+  
 
 if __name__ == "__main__":
     download('words')
