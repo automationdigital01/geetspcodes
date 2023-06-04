@@ -247,13 +247,7 @@ def main():
     
 
 
-    csv = df.to_csv().encode('utf-8')
-
-    st.download_button(label="Download data as CSV",
-                      data=csv,
-                      file_name='cv_df.csv',
-                      mime='text/csv',
-                     )
+    
 
 
 if __name__ == "__main__":
@@ -262,3 +256,10 @@ if __name__ == "__main__":
     nltk.download('punkt')
     nltk.download('averaged_perceptron_tagger')
     main()
+    csv = df.to_csv().encode('utf-8')
+
+    st.download_button(label="Download data as CSV",
+                      data=csv,
+                      file_name='cv_df.csv',
+                      mime='text/csv',
+                     )
