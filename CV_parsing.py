@@ -247,7 +247,7 @@ def main():
     
 
 
-    csv = convert_df(df)
+    csv = df.to_csv().encode('utf-8')
 
     st.download_button(label="Download data as CSV",
                       data=csv,
