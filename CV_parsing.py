@@ -10,7 +10,7 @@ from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pdfplumber
-import 
+ 
 
 
 def read_pdf_with_pdfplumber(file):
