@@ -122,7 +122,7 @@ def predict(filepaths, nlp):
         for ent in doc.ents:
             if ent.label_ == "EMAIL" and email is None:
                 email = ent.text
-            elif ent.label_ == "PERSON" and name is None:
+            elif ent.label_ == "NAME" and name is None:
                 name = ent.text
             elif ent.label_ == "ROLES" and roles is None:
                 roles = ent.text
