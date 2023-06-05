@@ -109,6 +109,7 @@ def predict(filepaths, nlp):
     for filepath in filepaths:
         file_contents=filepath
         #file_contents = filepath.decode('utf-8')
+        file_name=filepath.name
         email = None
         name = None
         roles = None
@@ -169,6 +170,7 @@ def predict(filepaths, nlp):
         
 
         entities_list.append({
+            "File": file_name,
             "Email": email,
             "Name": name,
             "Roles": roles,
@@ -242,7 +244,7 @@ def main():
         df.to_feather('df')
 
         st.write("Parsed Resumes:")
-        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+        st.dataframe(df[["File","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
         perform_education_analysis(df)
         
         csv = df.to_csv().encode('utf-8')
