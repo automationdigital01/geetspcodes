@@ -31,12 +31,13 @@ def main():
   st.title("Resume Mapping")
   cv_files = st.file_uploader("Choose the cv files to be mapped ", accept_multiple_files=True)
   #option = st.selectbox('file type',('text','pdf'))
-  result = st.button("Get result")
+  
   #only one file for job description
   jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
   jd_text=read_pdf_with_pdfplumber(jd_file)
   jd_clear=cleartext(jd_text)
   match_file=[]
+  result = st.button("Get result")
   #mapping with each cv
   for cv_file in cv_files:
     cv_text= read_pdf_with_pdfplumber(cv_file)
