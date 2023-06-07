@@ -48,10 +48,10 @@ def main():
     df=df.astype(str)
     df.to_feather('df')
     
- st.dataframe(df[["File", "Match%"]])   
+  st.dataframe(df[["File", "Match%"]])   
 
- csv = df.to_csv().encode('utf-8')
- st.download_button(label="Download data as CSV",
+  csv = df.to_csv().encode('utf-8')
+  st.download_button(label="Download data as CSV",
                            data=csv,
                            file_name='cv_df.csv',
                            mime='text/csv',) 
