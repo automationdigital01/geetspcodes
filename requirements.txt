@@ -8,4 +8,4 @@ matplotlib
 seaborn
 PyPDF2
 pdfplumber
-
+scikit-learn==1.2.2
