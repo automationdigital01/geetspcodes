@@ -38,16 +38,16 @@ def main():
   jd_clear=cleartext(jd_text)
   match_file=[]
   result = st.button("Get result")
-  #mapping with each cv
-  for cv_file in cv_files:
-    cv_text= read_pdf_with_pdfplumber(cv_file)
-    cv_clear=cleartext(cv_text)
-    Match=check_similarity(cv_clear, jd_clear)
-    match_file.append({"File": cv_file,
-                       "Match%": Match})
-    df= pd.DataFrame(match_file)
-    df=df.astype(str)
-    df.to_feather('df')
+  if result and uploaded_files is not None:
+    for cv_file in cv_files:
+      cv_text= read_pdf_with_pdfplumber(cv_file)
+      cv_clear=cleartext(cv_text)
+      Match=check_similarity(cv_clear, jd_clear)
+      match_file.append({"File": cv_file,
+                         "Match%": Match})
+      df= pd.DataFrame(match_file)
+      df=df.astype(str)
+      df.to_feather('df')
     
   st.dataframe(df[["File", "Match%"]])   
 
