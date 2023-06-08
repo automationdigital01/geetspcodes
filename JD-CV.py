@@ -3,7 +3,7 @@ import pdfplumber
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from CV_parsing import 
+import CV_parsing  
 
 #pdf extract 
 def read_pdf_with_pdfplumber(file):
@@ -46,17 +46,21 @@ def main():
       Match=check_similarity(cv_clear, jd_clear)
       match_file.append({"File": cv_file,
                          "Match%": Match})
-      df= pd.DataFrame(match_file)
-      df=df.astype(str)
-      df.to_feather('df')
+      match_df= pd.DataFrame(match_file)
+      match_df=match_df.astype(str)
+      match_df.to_feather('match_df')
     
-  st.dataframe(df[["File", "Match%"]])   
+  st.dataframe(match_df[["File", "Match%"]])  
+  
+  def extract_info(file_list):
+    
 
   csv = df.to_csv().encode('utf-8')
   st.download_button(label="Download data as CSV",
                            data=csv,
                            file_name='cv_df.csv',
                            mime='text/csv',) 
+  
 
 if __name__ == "__main__":
   main()
