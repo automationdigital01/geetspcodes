@@ -235,8 +235,8 @@ def main():
                 pdf_contents = read_pdf_with_pdfplumber(uploaded_file)
                 text.append(pdf_contents)
             else:
-                text.append(uploaded_file)
-                       
+                text = uploaded_file.decode('utf-8')
+                text.append(file)
         df = predict(text, nlp)
         df=df.astype(str)
         df.to_feather('df')
