@@ -3,6 +3,7 @@ import pdfplumber
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from 
 
 #pdf extract 
 def read_pdf_with_pdfplumber(file):
