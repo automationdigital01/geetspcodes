@@ -53,6 +53,8 @@ def main():
   st.dataframe(match_df[["File", "Match%"]])  
   
   def extract_info(file_list):
+    files=match_df['File']
+    text=CV_parsing.
     
 
   csv = df.to_csv().encode('utf-8')
