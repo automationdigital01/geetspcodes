@@ -3,7 +3,7 @@ import pdfplumber
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import CV_parsing  
+ 
 
 #pdf extract 
 def read_pdf_with_pdfplumber(file):
@@ -52,9 +52,9 @@ def main():
     
   st.dataframe(match_df[["File", "Match%"]])  
   
-  def extract_info(file_list):
-    files=match_df['File']
-    text=CV_parsing.
+  
+  files=match_df['File']
+  exec(open("CV_parsing.py").read())
     
 
   csv = df.to_csv().encode('utf-8')
