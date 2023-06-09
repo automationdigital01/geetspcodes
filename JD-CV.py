@@ -60,10 +60,10 @@ def main():
   
   
   uploaded_files=bestmatch_df['File']
-  exec(open("CV_parsing.py").read())
+  #exec(open("CV_parsing.py").read())
   #df=CV_parsing.main()  
 
-  csv = df.to_csv().encode('utf-8')
+  csv = bestmatch_df.to_csv().encode('utf-8')
   st.download_button(label="Download data as CSV",
                            data=csv,
                            file_name='cv_df.csv',
