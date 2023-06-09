@@ -240,7 +240,7 @@ def main():
    gdown.download(model_url, output_file, quiet=False)
 
    with zipfile.ZipFile(output_file, "r") as zip_ref:
-   zip_ref.extractall("model-best")
+       zip_ref.extractall("model-best")
 
    model_path = "./model-best"
    nlp = spacy.load(model_path)
@@ -268,7 +268,7 @@ def main():
                pdf_contents = read_pdf_with_pdfplumber(match_file)
                text.append(pdf_contents)
         else:
-               text.append(file)
+               text.append(match_file)
     
                    
                      
