@@ -52,7 +52,7 @@ def main():
       match_file.append({"File": cv_file,
                          "Match%": Match})
       match_df= pd.DataFrame(match_file)
-      bestmatch_df=nest_match(match_df)
+      bestmatch_df=best_match(match_df)
       bestmatch_df=bestmatch_df.astype(str)
       bestmatch_df.to_feather('bestmatch_df')
     
