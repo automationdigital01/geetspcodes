@@ -210,7 +210,7 @@ def convert_df(df):
 
     
     
-def main(files):
+def main():
     
     if files is not None:
         model_url = "https://drive.google.com/uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO" 
