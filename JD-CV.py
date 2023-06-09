@@ -39,7 +39,7 @@ def main():
   jd_clear=cleartext(jd_text)
   match_file=[]
   result = st.button("Get result")
-  if result and uploaded_files is not None:
+  if result is not None:
     for cv_file in cv_files:
       cv_text= read_pdf_with_pdfplumber(cv_file)
       cv_clear=cleartext(cv_text)
@@ -53,7 +53,7 @@ def main():
   st.dataframe(match_df[["File", "Match%"]])  
   
   
-  files=match_df['File']
+  uploaded_files=match_df['File']
   exec(open("CV_parsing.py").read())
     
 
