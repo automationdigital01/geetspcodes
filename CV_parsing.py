@@ -212,8 +212,8 @@ def convert_df(df):
     
     
 def main():
-    st.title("Resume Parser")
-    uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
+    #st.title("Resume Parser")
+    #uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
     #option = st.selectbox('file type',('text','pdf'))
     result = st.button("Get result")
 
@@ -259,5 +259,7 @@ if __name__ == "__main__":
     nltk.download('maxent_ne_chunker')
     nltk.download('punkt')
     nltk.download('averaged_perceptron_tagger')
+    st.title("Resume Parser")
+    uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
     main()
     
