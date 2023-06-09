@@ -28,6 +28,11 @@ def check_similarity(CV_Clear, JD_Clear):
   #print('Match Percentage is :'+ str(MatchPercentage)+'% to Requirement')
   return MatchPercentage
   
+def best_match(df):
+  best_match=df.iloc[df['Match%'].argsort()[-3:]]  ##gives best three matches
+  return best_match
+  
+  
 def main():
   st.title("Resume Mapping")
   cv_files = st.file_uploader("Choose the cv files to be mapped ", accept_multiple_files=True)
@@ -47,15 +52,16 @@ def main():
       match_file.append({"File": cv_file,
                          "Match%": Match})
       match_df= pd.DataFrame(match_file)
-      match_df=match_df.astype(str)
-      match_df.to_feather('match_df')
+      bestmatch_df=nest_match(match_df)
+      bestmatch_df=bestmatch_df.astype(str)
+      bestmatch_df.to_feather('bestmatch_df')
     
-  st.dataframe(match_df[["File", "Match%"]])  
+  st.dataframe(bestmatch_df[["File", "Match%"]])  
   
   
-  uploaded_files=match_df['File']
-  #exec(open("CV_parsing.py").read())
-  df=CV_parsing.main()  
+  uploaded_files=bestmatch_df['File']
+  exec(open("CV_parsing.py").read())
+  #df=CV_parsing.main()  
 
   csv = df.to_csv().encode('utf-8')
   st.download_button(label="Download data as CSV",
