@@ -3,7 +3,8 @@ import pdfplumber
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-#import CV_parsing 
+import CV_parsing
+   
 
 #pdf extract 
 def read_pdf_with_pdfplumber(file):
@@ -28,10 +29,7 @@ def check_similarity(CV_Clear, JD_Clear):
   #print('Match Percentage is :'+ str(MatchPercentage)+'% to Requirement')
   return MatchPercentage
   
-def best_match(df):
-  best_match=df.iloc[df['Match%'].argsort()[-3:]]  ##gives best three matches
-  return best_match
-  
+
   
 def main():
   st.title("Resume Mapping")
@@ -49,25 +47,13 @@ def main():
       cv_text= read_pdf_with_pdfplumber(cv_file)
       cv_clear=cleartext(cv_text)
       Match=check_similarity(cv_clear, jd_clear)
-      match_file.append({"File": cv_file,
-                         "Match%": Match})
-      match_df= pd.DataFrame(match_file)
-      bestmatch_df=best_match(match_df)
-      #bestmatch_df=bestmatch_df.astype(str)
-      #bestmatch_df.to_feather('bestmatch_df')
-    
-  st.dataframe(bestmatch_df[["File", "Match%"]])  
+      if (Match>50):
+        match_file.append(cv_file)
+        exec(open("CV_parsing.py").read())
+        
+      
+      
   
-  
-  uploaded_files=bestmatch_df['File']
-  exec(open("all_functions.py").read())
-  #df=CV_parsing.main()  
-
-  csv = bestmatch_df.to_csv().encode('utf-8')
-  st.download_button(label="Download data as CSV",
-                           data=csv,
-                           file_name='cv_df.csv',
-                           mime='text/csv',) 
   
 
 if __name__ == "__main__":
