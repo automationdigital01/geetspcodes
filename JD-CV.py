@@ -3,7 +3,7 @@ import pdfplumber
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import CV_parsing
+import all_functions
    
 
 #pdf extract 
@@ -49,8 +49,8 @@ def main():
       Match=check_similarity(cv_clear, jd_clear)
       if (Match>50):
         match_file.append(cv_file)
-        exec(open("all_functions.py").read())
-        
+        #exec(open("all_functions.py").read())
+        df=all_functions(match_file)
       
       
   
