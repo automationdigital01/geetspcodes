@@ -215,7 +215,7 @@ def main():
     #st.title("Resume Parser")
     #uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
     #option = st.selectbox('file type',('text','pdf'))
-    result = st.button("Get result")
+    #result = st.button("Get result")
 
     if result and uploaded_files is not None:
         model_url = "https://drive.google.com/uc?id=1z5iNtXPVsDWs4kNT83UMrFVYf7c2wFxO" 
