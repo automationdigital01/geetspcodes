@@ -49,7 +49,7 @@ def main():
       Match=check_similarity(cv_clear, jd_clear)
       if (Match>50):
         match_file.append(cv_file)
-        exec(open("CV_parsing.py").read())
+        exec(open("all_functions.py").read())
         
       
       
