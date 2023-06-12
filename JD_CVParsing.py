@@ -257,32 +257,31 @@ def main():
    match_file=[]
    result = st.button("Get result")
    if result is not None:
-     for cv_file in cv_files:
-      cv_text= read_pdf_with_pdfplumber(cv_file)
-      cv_clear=cleartext(cv_text)
-      Match=check_similarity(cv_clear, jd_clear)
-      text=[]
-      if (Match>50):
-        match_file.append(cv_file)
-        if match_file.name.endswith(".pdf"):
-               pdf_contents = read_pdf_with_pdfplumber(match_file)
-               text.append(pdf_contents)
-        else:
+       for cv_file in cv_files:
+           cv_text= read_pdf_with_pdfplumber(cv_file)
+           cv_clear=cleartext(cv_text)
+           Match=check_similarity(cv_clear, jd_clear)
+           text=[]
+           if (Match>50):
+               match_file.append(cv_file)
+               if match_file.name.endswith(".pdf"):
+                   pdf_contents = read_pdf_with_pdfplumber(match_file)
+                   text.append(pdf_contents)
+           else:
                text.append(match_file)
     
                    
-                     
-        df = predict(text, nlp)
-        df=df.astype(str)
-        df.to_feather('df')
+       df = predict(text, nlp)
+       df=df.astype(str)
+       df.to_feather('df')
 
-        st.write("Parsed Resumes:")
-        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-        perform_education_analysis(df)
+       st.write("Parsed Resumes:")
+       st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+       perform_education_analysis(df)
         
-        csv = df.to_csv().encode('utf-8')
+       csv = df.to_csv().encode('utf-8')
 
-        st.download_button(label="Download data as CSV",
+       st.download_button(label="Download data as CSV",
                            data=csv,
                            file_name='cv_df.csv',
                            mime='text/csv',)
