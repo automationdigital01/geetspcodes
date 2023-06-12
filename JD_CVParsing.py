@@ -264,7 +264,7 @@ def main():
            text=[]
            if (Match>50):
                match_file.append(cv_file)
-               if match_file.name.endswith(".pdf"):
+               if match_file.endswith(".pdf"):
                    pdf_contents = read_pdf_with_pdfplumber(match_file)
                    text.append(pdf_contents)
            else:
