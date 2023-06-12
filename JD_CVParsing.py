@@ -266,7 +266,7 @@ def main():
                match_file.append(cv_text)
                
                    
-       df = predict(text, nlp)
+       df = predict(cv_text, nlp)
        df=df.astype(str)
        df.to_feather('df')
 
