@@ -261,12 +261,10 @@ def main():
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           text=[]
+           
            if (Match>50):
-               match_file.append(cv_file)
-               pdf_contents = read_pdf_with_pdfplumber(match_file)
-               text.append(pdf_contents)
-              
+               match_file.append(cv_text)
+               
                    
        df = predict(text, nlp)
        df=df.astype(str)
