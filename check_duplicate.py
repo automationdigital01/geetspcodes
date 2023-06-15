@@ -1,6 +1,6 @@
 #import os
 #from pathlib import Path
-from filecmp import cmp
+from filecmp2 import cmp_contents
 import streamlit as st
 
 # list all documents
@@ -16,10 +16,9 @@ for file in files:
     is_duplicate = False
     
     for class_ in duplicates:
-        is_duplicate = cmp(
+        is_duplicate = cmp_contents(
             file,
-            class_[0],
-            shallow = False
+            class_[0]
         )
         if is_duplicate:
             class_.append(file)
