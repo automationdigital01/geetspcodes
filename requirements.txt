@@ -9,4 +9,4 @@ seaborn
 PyPDF2
 pdfplumber
 scikit-learn==1.2.2
-filecmp
+filecmp2==1.0.0
