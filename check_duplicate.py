@@ -17,8 +17,8 @@ for file in files:
     
     for class_ in duplicates:
         is_duplicate = cmp(
-            DATA_DIR / file,
-            DATA_DIR / class_[0],
+            file,
+            class_[0],
             shallow = False
         )
         if is_duplicate:
