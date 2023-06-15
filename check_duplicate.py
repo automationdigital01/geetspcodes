@@ -29,4 +29,4 @@ for file in files:
         duplicates.append([file])     
 
 # show results
-duplicates
+st.write(duplicates)
