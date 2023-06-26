@@ -104,7 +104,8 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(file_contents, nlp):
+def predict(file, nlp):
+    file_contents=read_pdf_with_pdfplumber(file)
     entities_list = []
    
     #file_contents = filepath.decode('utf-8')
@@ -263,10 +264,10 @@ def main():
            Match=check_similarity(cv_clear, jd_clear)
            
            if Match>50:
-               df = df.append(predict(cv_text, nlp))
+               
                match_file.append(cv_file)
                match_percent.append(Match)
-               
+       df = predict(match_file, nlp)        
        df=df.assign(File=[match_file])
        df=df.assign(Match_percent=[match_percent])
        df=df.astype(str)
