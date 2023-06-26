@@ -104,8 +104,8 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(file, nlp):
-    file_contents=read_pdf_with_pdfplumber(file)
+def predict(file_contents, nlp):
+    
     entities_list = []
    
     #file_contents = filepath.decode('utf-8')
