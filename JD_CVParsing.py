@@ -261,7 +261,7 @@ def main():
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
            
-           if (Match>50):
+           if (Match>80):
                match_file.append(cv_text)
                #match_percent.append(Match)
                    
