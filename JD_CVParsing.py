@@ -263,9 +263,9 @@ def main():
            Match=check_similarity(cv_clear, jd_clear)
            
            if Match>50:
-               df = predict(match_file, nlp)
-               df=df.assign(File=[match_filename])
-               df=df.assign(Match_percent=[match_percent])
+               df = predict(cv_text, nlp)
+               df=df.assign(File=[cv_file])
+               df=df.assign(Match_percent=[Match])
                df=df.astype(str)
                df.to_feather('df')
        
