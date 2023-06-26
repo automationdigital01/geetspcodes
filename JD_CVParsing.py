@@ -271,11 +271,12 @@ def main():
            df = predict(f, nlp)        
            df['File']=[f]
            df['Match_percent']=[m]
-           df=df.astype(str)
-           df.to_feather('df')
+      
        
-           st.write("Parsed Resumes:")
-           st.dataframe(df[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]])
+       st.write("Parsed Resumes:")
+       st.dataframe(df[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]])
+       df=df.astype(str)
+       df.to_feather('df')
        perform_education_analysis(df)
         
        csv = df.to_csv().encode('utf-8')
