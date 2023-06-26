@@ -254,6 +254,7 @@ def main():
    jd_clear=cleartext(jd_text)
    match_file=[]
    match_percent=[]
+   match_filename=[]
    result = st.button("Get result")
    if result is not None:
        for cv_file in cv_files:
@@ -263,14 +264,16 @@ def main():
            
            if Match>50:
                match_file.append(cv_text)
-               #match_percent.append(Match)
-               df = predict(cv_text, nlp)
-               df['Match%']=[Match]
-               df=df.astype(str)
-               df.to_feather('df')
-       df.append(df)
+               match_filename.append(cv_file)
+               match_percent.append(Match)
+       df = predict(cv_text, nlp)
+       df=df.assign(File=[match_filename])
+       df=df.assign(Match%=[match_percent])
+       df=df.astype(str)
+       df.to_feather('df')
+       
        st.write("Parsed Resumes:")
-       st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match%"]])
+       st.dataframe(df[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match%"]])
        perform_education_analysis(df)
         
        csv = df.to_csv().encode('utf-8')
