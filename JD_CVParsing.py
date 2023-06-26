@@ -262,8 +262,9 @@ def main():
            
            if Match>50:
                df = df.append(predict(cv_text, nlp))
-               df['File']=[cv_file]
-               df['Match_percent']=[Match]
+               df=df.append(df.assign(File=[cv_file]))
+               df=df.append(df.assign(Match_percent=[Match]))
+               
                df=df.astype(str)
                df.to_feather('df')
        
