@@ -261,16 +261,16 @@ def main():
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
            
-           if (Match>80):
+           if Match>80:
                match_file.append(cv_text)
                match_percent.append(Match)
-               df = predict(cv_text, nlp)
-               df['Match%']=[match_percent]
+       df = predict(cv_text, nlp)
+       df['Match%']=[match_percent]
        df=df.astype(str)
        df.to_feather('df')
 
        st.write("Parsed Resumes:")
-       st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","Match%"]])
+       st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match%"]])
        perform_education_analysis(df)
         
        csv = df.to_csv().encode('utf-8')
