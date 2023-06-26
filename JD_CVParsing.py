@@ -252,9 +252,7 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   match_file=[]
-   match_percent=[]
-   match_filename=[]
+   df=[]
    result = st.button("Get result")
    if result is not None:
        for cv_file in cv_files:
@@ -263,9 +261,9 @@ def main():
            Match=check_similarity(cv_clear, jd_clear)
            
            if Match>50:
-               df = predict(cv_text, nlp)
-               df=df.assign(File=[cv_file])
-               df=df.assign(Match_percent=[Match])
+               df = df.append(predict(cv_text, nlp))
+               df['File']=[cv_file]
+               df['Match_percent']=[Match]
                df=df.astype(str)
                df.to_feather('df')
        
