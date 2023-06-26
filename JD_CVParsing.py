@@ -268,7 +268,7 @@ def main():
                df['Match%']=[Match]
                df=df.astype(str)
                df.to_feather('df')
-
+       df.append(df)
        st.write("Parsed Resumes:")
        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match%"]])
        perform_education_analysis(df)
