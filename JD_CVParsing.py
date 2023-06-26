@@ -267,7 +267,7 @@ def main():
                
                match_file.append(cv_file)
                match_percent.append(Match)
-       for f,m in match_file, match_percent:
+       for f,m in zip(match_file, match_percent):
            df = predict(f, nlp)        
            df['File']=[f]
            df['Match_percent']=[m]
