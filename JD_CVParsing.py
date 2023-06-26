@@ -266,7 +266,7 @@ def main():
                match_file.append(cv_text)
                match_filename.append(cv_file)
                match_percent.append(Match)
-       df = predict(cv_text, nlp)
+       df = predict(match_file, nlp)
        df=df.assign(File=[match_filename])
        df=df.assign(Match_percent=[match_percent])
        df=df.astype(str)
