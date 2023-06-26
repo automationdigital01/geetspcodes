@@ -264,19 +264,18 @@ def main():
            Match=check_similarity(cv_clear, jd_clear)
            
            if Match>50:
-               
+               text_file.append(cv_text)
                match_file.append(cv_file)
                match_percent.append(Match)
-       for f,m in zip(match_file, match_percent):
-           df = predict(f, nlp)        
-           df['File']=[f]
-           df['Match_percent']=[m]
-      
-       
-       st.write("Parsed Resumes:")
-       st.dataframe(df[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]])
+       df = predict(text_file, nlp)
+       df['File']=[match_file]
+       df['Match_percent']=[match_percent]
        df=df.astype(str)
        df.to_feather('df')
+        
+     
+       st.write("Parsed Resumes:")
+       st.dataframe(df[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]])
        perform_education_analysis(df)
         
        csv = df.to_csv().encode('utf-8')
