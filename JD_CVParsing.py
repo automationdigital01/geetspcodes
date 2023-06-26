@@ -254,6 +254,7 @@ def main():
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
    df=[]
+   text_file=[]
    match_file=[]
    match_percent=[]
    result = st.button("Get result")
