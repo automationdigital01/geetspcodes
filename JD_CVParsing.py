@@ -267,10 +267,10 @@ def main():
                
                match_file.append(cv_file)
                match_percent.append(Match)
-       for f in match_file:
+       for f,m in match_file, match_percent:
            df = predict(f, nlp)        
-       df['File']=[match_file]
-       df['Match_percent']=[match_percent]
+           df['File']=[f]
+           df['Match_percent']=[m]
        df=df.astype(str)
        df.to_feather('df')
        
