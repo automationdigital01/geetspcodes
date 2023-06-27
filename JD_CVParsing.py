@@ -104,11 +104,10 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(filepaths, nlp):
-    entities_list = []
-
-    for filepath in filepaths:
-        file_contents=filepath
+def predict(files, nlp):
+    for file in files:
+        file_contents=file
+        entities_list = []
         #file_contents = filepath.decode('utf-8')
         email = None
         name = None
@@ -177,7 +176,7 @@ def predict(filepaths, nlp):
             "Phone Number": phone_number,
             "Degree": degree,
             "Skills": skills
-        })
+            })
 
     return pd.DataFrame(entities_list)
 
@@ -270,8 +269,8 @@ def main():
                match_file.append(cv_file)
                match_percent.append(Match)
        df = predict(text_file, nlp)
-       df=df.assign(File=[match_file])
-       df=df.assign(Match_percent=[match_percent])
+       df['File']=[match_file]
+       df['Match_percent']=[match_percent]
        df=df.astype(str)
        df.to_feather('df')
         
