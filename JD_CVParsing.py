@@ -253,8 +253,8 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   df=[]
-   text_file=[]
+   
+   text_files=[]
    match_file=[]
    match_percent=[]
    result = st.button("Get result")
@@ -264,11 +264,11 @@ def main():
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
            
-           if Match>50:
-               text_file.append(cv_text)
+           if Match>80:
+               text_files.append(cv_text)
                match_file.append(cv_file)
                match_percent.append(Match)
-       df = predict(text_file, nlp)
+       df = predict(text_files, nlp)
        df['File']=[match_file]
        df['Match_percent']=[match_percent]
        df=df.astype(str)
