@@ -254,7 +254,7 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   
+   df=[]
    text_files=[]
    match_file=[]
    match_percent=[]
