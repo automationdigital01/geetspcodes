@@ -105,9 +105,10 @@ def extract_skills(txt):
     return extracted_skills
 
 def predict(files, nlp):
+    entities_list = []
     for file in files:
         file_contents=file
-        entities_list = []
+        
         #file_contents = filepath.decode('utf-8')
         email = None
         name = None
