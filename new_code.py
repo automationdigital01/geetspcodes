@@ -179,8 +179,8 @@ def predict(files, nlp):
             "Skills": skills
             })
 
-    return entities_list
-    #return pd.DataFrame(entities_list)
+    
+    return pd.DataFrame(entities_list)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -271,11 +271,10 @@ def main():
                match_file.append(cv_file)
                match_percent.append(Match)
        print( match_file, match_percent)     
-       data = predict(text_files, nlp)
-       df_cv=pd.DataFrame(data)
+       df1 = predict(text_files, nlp)
        df2= pd.DataFrame({'File' :  match_file,
                           'Match_percent': match_percent})
-       df_cv= pd.concat([df_cv, df2], ignore_index=True)                        
+       df_cv= pd.concat([df1, df2], ignore_index=True)                        
                     
        df_cv=df_cv.astype(str)
        df_cv.to_feather('df_cv')
