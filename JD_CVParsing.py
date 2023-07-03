@@ -267,7 +267,7 @@ def main():
                    
        df = predict(match_file, nlp)
        df=df.astype(str)
-       df.to_feather('df')
+       df.to_feather("df")
 
        st.write("Parsed Resumes:")
        st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
