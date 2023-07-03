@@ -255,7 +255,7 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   df_cv=pd.DataFrame(columns=["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"])
+   
    text_files=[]
    match_file=[]
    match_percent=[]
@@ -271,9 +271,10 @@ def main():
                match_file.append(cv_file)
                match_percent.append(Match)
        data = predict(text_files, nlp)
+       df_cv=pd.DataFrame(data)
        df_cv['File']= match_file
-       df_cv[['"Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills']]= data
-       df_cv["Match_percent"]=match_percent
+       
+       df_cv['Match_percent']=match_percent
        df_cv.append(df_cv)
        
        df_cv=df_cv.astype(str)
