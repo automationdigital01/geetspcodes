@@ -275,7 +275,7 @@ def main():
        df_cv['File']= match_file
        
        df_cv['Match_percent']=match_percent
-       
+       df_cv = df_cv.reset_index(drop=True) 
        
        df_cv=df_cv.astype(str)
        df_cv.to_feather('df_cv')
