@@ -273,14 +273,15 @@ def main():
        print( match_file, match_percent)     
        data = predict(text_files, nlp)
        df_cv=pd.DataFrame(data)
-       df_cv['File']= match_file
-       df_cv['Match_percent']=match_percent
-             
+       df2= pd.DataFrame({'File' :  match_file,
+                          'Match_percent': match_percent})
+       df_cv= pd.concat([df_cv, df2], ignore_index=True)                        
+                    
        df_cv=df_cv.astype(str)
        df_cv.to_feather('df_cv')
           
        st.write("Parsed Resumes:")
-       st.dataframe(df_cv[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","File", "Match_percent"]], ignore_index=True)
+       st.dataframe(df_cv[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","File", "Match_percent"]])
        perform_education_analysis(df_cv)
         
        csv = df_cv.to_csv().encode('utf-8')
