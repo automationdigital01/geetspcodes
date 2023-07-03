@@ -260,7 +260,7 @@ def main():
    match_percent=[]
    result = st.button("Get result")
    if result is not None:
-       df1=predict(cv_files)    
+       df1=predict(cv_files,nlp)    
        for cv_file in cv_files:
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
