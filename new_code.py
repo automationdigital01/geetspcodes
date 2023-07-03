@@ -275,14 +275,14 @@ def main():
        df_cv['File']= match_file
        
        df_cv['Match_percent']=match_percent
-       df_cv = df_cv.reset_index(drop=True) 
+       
        
        df_cv=df_cv.astype(str)
        df_cv.to_feather('df_cv')
         
      
        st.write("Parsed Resumes:")
-       st.dataframe(df_cv[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","File", "Match_percent"]])
+       st.dataframe(df_cv[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","File", "Match_percent"]], ignore_index=True)
        perform_education_analysis(df_cv)
         
        csv = df_cv.to_csv().encode('utf-8')
