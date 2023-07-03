@@ -254,33 +254,31 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   df=[]
+   
    text_files=[]
    match_file=[]
    match_percent=[]
    result = st.button("Get result")
    if result is not None:
+       df1=predict(cv_files)    
        for cv_file in cv_files:
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           
-           if Match>80:
-               text_files.append(cv_text)
-               match_file.append(cv_file)
-               match_percent.append(Match)
-       df = predict(text_files, nlp)
-       df['File']=[match_file]
-       df['Match_percent']=[match_percent]
-       df=df.astype(str)
-       df.to_feather('df')
+           match_file.append(cv_file)
+           match_percent.append(Match)
+           df2= pd.DataFrame({'File' :  [match_file],'Match_percent': [match_percent]})
+           df_cv= pd.concat([df1, df2], ignore_index=True)     
+       
+       df_cv=df_cv.astype(str)
+       df_cv.to_feather('df_cv')
         
      
        st.write("Parsed Resumes:")
-       st.dataframe(df[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]],ignore_index=True)
-       perform_education_analysis(df)
+       st.dataframe(df_cv[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]],ignore_index=True)
+       perform_education_analysis(df_cv)
         
-       csv = df.to_csv().encode('utf-8')
+       csv = df_cv.to_csv().encode('utf-8')
 
        st.download_button(label="Download data as CSV",
                            data=csv,
