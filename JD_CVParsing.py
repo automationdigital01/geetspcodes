@@ -262,10 +262,10 @@ def main():
            Match=check_similarity(cv_clear, jd_clear)
            
            if (Match>50):
-               match_file.append(cv_text)
+               match_file.append(cv_file)
                
                    
-       df = predict(cv_text, nlp)
+       df = predict(match_file, nlp)
        df=df.astype(str)
        df.to_feather('df')
 
