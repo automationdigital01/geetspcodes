@@ -6,7 +6,7 @@ import pandas as pd
 import re
 import nltk
 from nltk import ne_chunk, pos_tag, word_tokenize, download
-from spacy.matcher import PhraseMatcher
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pdfplumber
