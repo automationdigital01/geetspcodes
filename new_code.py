@@ -282,7 +282,7 @@ def main():
         
      
        st.write("Parsed Resumes:")
-       st.dataframe(df_cv[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]])
+       st.dataframe(df_cv[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","File", "Match_percent"]])
        perform_education_analysis(df_cv)
         
        csv = df_cv.to_csv().encode('utf-8')
