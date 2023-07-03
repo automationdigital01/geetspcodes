@@ -104,80 +104,78 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(files, nlp):
+def predict(file_contents, nlp):
     entities_list = []
-    for file in files:
-        file_contents=file
-        
-        #file_contents = filepath.decode('utf-8')
-        email = None
-        name = None
-        roles = None
-        education = None
-        phone_number = None
-        degree = None
-        skills= None
+   
+    #file_contents = filepath.decode('utf-8')
+    email = None
+    name = None
+    roles = None
+    education = None
+    phone_number = None
+    degree = None
+    skills= None
         
 
-        doc = nlp(file_contents)
-        for ent in doc.ents:
-            if ent.label_ == "EMAIL" and email is None:
-                email = ent.text
-            elif ent.label_ == "NAME" and name is None:
-                name = ent.text
-            elif ent.label_ == "ROLES" and roles is None:
-                roles = ent.text
-            elif ent.label_ == "EDUCATION" and education is None:
-                education = ent.text
-            elif ent.label_ == "PHONE NUMBER" and phone_number is None:
-                phone_number = ent.text
-            elif ent.label_ == "DEGREE" and degree is None:
-                degree = ent.text
-            elif ent.label_ == "SKILLS" and skills is None:
-                skills = ent.text
+    doc = nlp(file_contents)
+    for ent in doc.ents:
+        if ent.label_ == "EMAIL" and email is None:
+            email = ent.text
+        elif ent.label_ == "NAME" and name is None:
+            name = ent.text
+        elif ent.label_ == "ROLES" and roles is None:
+            roles = ent.text
+        elif ent.label_ == "EDUCATION" and education is None:
+            education = ent.text
+        elif ent.label_ == "PHONE NUMBER" and phone_number is None:
+            phone_number = ent.text
+        elif ent.label_ == "DEGREE" and degree is None:
+            degree = ent.text
+        elif ent.label_ == "SKILLS" and skills is None:
+            skills = ent.text
     
 
-        if email is None:
-            extracted_emails = extract_emails(file_contents)
-            if extracted_emails:
-                email = extracted_emails[0]
+    if email is None:
+        extracted_emails = extract_emails(file_contents)
+        if extracted_emails:
+            email = extracted_emails[0]
 
-        if name is None:
-            extracted_names = extract_names(file_contents)
-            if extracted_names:
-                name = extracted_names[0]
+    if name is None:
+        extracted_names = extract_names(file_contents)
+        if extracted_names:
+            name = extracted_names[0]
 
-        if phone_number is None:
-            extracted_phone_numbers = get_phone_numbers(file_contents)
-            if extracted_phone_numbers:
-                phone_number = extracted_phone_numbers[0]
+    if phone_number is None:
+        extracted_phone_numbers = get_phone_numbers(file_contents)
+        if extracted_phone_numbers:
+            phone_number = extracted_phone_numbers[0]
 
-        if degree is None or degree == "NA":
-            extracted_degrees = extract_degree(file_contents)
-            if extracted_degrees:
-                degree = extracted_degrees[0]
+    if degree is None or degree == "NA":
+        extracted_degrees = extract_degree(file_contents)
+        if extracted_degrees:
+            degree = extracted_degrees[0]
                 
-        if education is None or education == "NA":
-            extracted_education = extract_education(file_contents)
-            if extracted_education:
-                degree = extracted_education[0] 
+    if education is None or education == "NA":
+        extracted_education = extract_education(file_contents)
+        if extracted_education:
+            degree = extracted_education[0] 
                 
-        if skills is None or skills == "NA":
-            extracted_skills = extract_skills(file_contents)
-            if extracted_skills:
-                skills = extracted_skills[0]             
+    if skills is None or skills == "NA":
+        extracted_skills = extract_skills(file_contents)
+        if extracted_skills:
+            skills = extracted_skills[0]             
 
         
 
-        entities_list.append({
-            "Email": email,
-            "Name": name,
-            "Roles": roles,
-            "Education": education,
-            "Phone Number": phone_number,
-            "Degree": degree,
-            "Skills": skills
-            })
+    entities_list.append({
+        "Email": email,
+        "Name": name,
+        "Roles": roles,
+        "Education": education,
+        "Phone Number": phone_number,
+        "Degree": degree,
+        "Skills": skills
+        })
 
     return pd.DataFrame(entities_list)
 
@@ -254,31 +252,27 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   
-   text_files=[]
    match_file=[]
-   match_percent=[]
    result = st.button("Get result")
    if result is not None:
-       df1=predict(cv_files,nlp)    
        for cv_file in cv_files:
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           match_file.append(cv_file)
-           match_percent.append(Match)
-           df2= pd.DataFrame({'File' :  [match_file],'Match_percent': [match_percent]})
-           df_cv= pd.concat([df1, df2], ignore_index=True)     
-       
-       df_cv=df_cv.astype(str)
-       df_cv.to_feather('df_cv')
-        
-     
+           
+           if (Match>50):
+               match_file.append(cv_text)
+               
+                   
+       df = predict(cv_text, nlp)
+       df=df.astype(str)
+       df.to_feather('df')
+
        st.write("Parsed Resumes:")
-       st.dataframe(df_cv[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills", "Match_percent"]],ignore_index=True)
-       perform_education_analysis(df_cv)
+       st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+       perform_education_analysis(df)
         
-       csv = df_cv.to_csv().encode('utf-8')
+       csv = df.to_csv().encode('utf-8')
 
        st.download_button(label="Download data as CSV",
                            data=csv,
