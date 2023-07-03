@@ -270,18 +270,15 @@ def main():
                text_files.append(cv_text)
                match_file.append(cv_file)
                match_percent.append(Match)
+       print( match_file, match_percent)     
        data = predict(text_files, nlp)
        df_cv=pd.DataFrame(data)
-       
        df_cv['File']= match_file
-       
        df_cv['Match_percent']=match_percent
-       
-       
+             
        df_cv=df_cv.astype(str)
        df_cv.to_feather('df_cv')
-        
-     
+          
        st.write("Parsed Resumes:")
        st.dataframe(df_cv[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills","File", "Match_percent"]], ignore_index=True)
        perform_education_analysis(df_cv)
