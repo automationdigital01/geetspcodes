@@ -104,78 +104,79 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(file_contents, nlp):
+def predict(filepaths, nlp):
     entities_list = []
-   
-    #file_contents = filepath.decode('utf-8')
-    email = None
-    name = None
-    roles = None
-    education = None
-    phone_number = None
-    degree = None
-    skills= None
+    for filepath in filepaths:
+        file_contents=filepath
+        #file_contents = filepath.decode('utf-8')
+        email = None
+        name = None
+        roles = None
+        education = None
+        phone_number = None
+        degree = None
+        skills= None
         
 
-    doc = nlp(file_contents)
-    for ent in doc.ents:
-        if ent.label_ == "EMAIL" and email is None:
-            email = ent.text
-        elif ent.label_ == "NAME" and name is None:
-            name = ent.text
-        elif ent.label_ == "ROLES" and roles is None:
-            roles = ent.text
-        elif ent.label_ == "EDUCATION" and education is None:
-            education = ent.text
-        elif ent.label_ == "PHONE NUMBER" and phone_number is None:
-            phone_number = ent.text
-        elif ent.label_ == "DEGREE" and degree is None:
-            degree = ent.text
-        elif ent.label_ == "SKILLS" and skills is None:
-            skills = ent.text
+        doc = nlp(file_contents)
+        for ent in doc.ents:
+            if ent.label_ == "EMAIL" and email is None:
+                email = ent.text
+            elif ent.label_ == "NAME" and name is None:
+                name = ent.text
+            elif ent.label_ == "ROLES" and roles is None:
+                roles = ent.text
+            elif ent.label_ == "EDUCATION" and education is None:
+                education = ent.text
+            elif ent.label_ == "PHONE NUMBER" and phone_number is None:
+                phone_number = ent.text
+            elif ent.label_ == "DEGREE" and degree is None:
+                degree = ent.text
+            elif ent.label_ == "SKILLS" and skills is None:
+                skills = ent.text
     
 
-    if email is None:
-        extracted_emails = extract_emails(file_contents)
-        if extracted_emails:
-            email = extracted_emails[0]
+        if email is None:
+            extracted_emails = extract_emails(file_contents)
+            if extracted_emails:
+                email = extracted_emails[0]
 
-    if name is None:
-        extracted_names = extract_names(file_contents)
-        if extracted_names:
-            name = extracted_names[0]
+        if name is None:
+            extracted_names = extract_names(file_contents)
+            if extracted_names:
+                name = extracted_names[0]
 
-    if phone_number is None:
-        extracted_phone_numbers = get_phone_numbers(file_contents)
-        if extracted_phone_numbers:
-            phone_number = extracted_phone_numbers[0]
+        if phone_number is None:
+            extracted_phone_numbers = get_phone_numbers(file_contents)
+            if extracted_phone_numbers:
+                phone_number = extracted_phone_numbers[0]
 
-    if degree is None or degree == "NA":
-        extracted_degrees = extract_degree(file_contents)
-        if extracted_degrees:
-            degree = extracted_degrees[0]
+        if degree is None or degree == "NA":
+            extracted_degrees = extract_degree(file_contents)
+            if extracted_degrees:
+                degree = extracted_degrees[0]
                 
-    if education is None or education == "NA":
-        extracted_education = extract_education(file_contents)
-        if extracted_education:
-            degree = extracted_education[0] 
+        if education is None or education == "NA":
+            extracted_education = extract_education(file_contents)
+            if extracted_education:
+                degree = extracted_education[0] 
                 
-    if skills is None or skills == "NA":
-        extracted_skills = extract_skills(file_contents)
-        if extracted_skills:
-            skills = extracted_skills[0]             
+        if skills is None or skills == "NA":
+            extracted_skills = extract_skills(file_contents)
+            if extracted_skills:
+                skills = extracted_skills[0]             
 
         
 
-    entities_list.append({
-        "Email": email,
-        "Name": name,
-        "Roles": roles,
-        "Education": education,
-        "Phone Number": phone_number,
-        "Degree": degree,
-        "Skills": skills
-        })
+        entities_list.append({
+            "Email": email,
+            "Name": name,
+            "Roles": roles,
+            "Education": education,
+            "Phone Number": phone_number,
+            "Degree": degree,
+            "Skills": skills
+            })
 
     return pd.DataFrame(entities_list)
 
