@@ -272,6 +272,7 @@ def main():
                match_percent.append(Match)
        data = predict(text_files, nlp)
        df_cv=pd.DataFrame(data)
+       
        df_cv['File']= match_file
        
        df_cv['Match_percent']=match_percent
