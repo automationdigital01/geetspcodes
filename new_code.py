@@ -270,12 +270,11 @@ def main():
                text_files.append(cv_text)
                match_file.append(cv_file)
                match_percent.append(Match)
-       print( match_file, match_percent)     
-       df1 = predict(text_files, nlp)
-       df2= pd.DataFrame({'File' :  match_file,
-                          'Match_percent': match_percent})
-       #df_cv= pd.concat([df1, df2], ignore_index=True)                        
-       df_cv= df1.append(df2, ignore_index=True)             
+           print( match_file, match_percent)     
+           df1 = predict(text_files, nlp)
+           df2= pd.DataFrame({'File' :  match_file,'Match_percent': match_percent})
+       df_cv= pd.concat([df1, df2], ignore_index=True)                        
+       #df_cv= df1.append(df2, ignore_index=True)             
        df_cv=df_cv.astype(str)
        df_cv.to_feather('df_cv')
           
