@@ -265,7 +265,7 @@ def main():
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           
+           print(match)
            if Match>80:
                text_files.append(cv_text)
                match_file.append(cv_file)
