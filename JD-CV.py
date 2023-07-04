@@ -255,24 +255,30 @@ def main():
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
    match_file=[]
+   all_data=[] 
    result = st.button("Get result")
    if result is not None:
        for cv_file in cv_files:
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           
-           if (Match>95):
-               match_file.append(cv_text)
+           all_match.append({'File' : cv_file,
+                             'Match Percent' : Match})
+           df_all=pd.DataFrame(all_match)
+           #if (Match>95):
+            #   match_file.append(cv_text)
                
                    
-       df = predict(cv_text, nlp)
-       df=df.astype(str)
-       df.to_feather('df')
+       #df = predict(cv_text, nlp)
+       #df=df.astype(str)
+       #df.to_feather('df')
 
-       st.write("Parsed Resumes:")
-       st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-       perform_education_analysis(df)
+       #st.write("Parsed Resumes:")
+       #st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+       df_all=df_all.astype(str)
+       df_all.to_feather('df_all')
+       st.dataframe(df_all[["File","Match Percent"]])
+       #perform_education_analysis(df)
         
        csv = df.to_csv().encode('utf-8')
 
