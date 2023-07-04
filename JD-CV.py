@@ -105,8 +105,9 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(file_contents, nlp):
+def predict(files, nlp):
     entities_list = []
+    for 
    
     #file_contents = filepath.decode('utf-8')
     email = None
@@ -255,16 +256,20 @@ def main():
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
    match_file=[]
-   all_data=[] 
+    
    result = st.button("Get result")
    if result is not None:
+       all_file=[]
+       match=[]
+       all_data=[]
        for cv_file in cv_files:
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           all_match.append({'File' : cv_file,
-                             'Match Percent' : Match})
-           df_all=pd.DataFrame(all_match)
+           all_file.append(cv_file)
+           match.append(Match)
+        all_match.append({'File' : all_file,'Match Percent' : match})
+        df_all=pd.DataFrame(all_match)
            #if (Match>95):
             #   match_file.append(cv_text)
                
