@@ -12,7 +12,8 @@ import seaborn as sns
 import pdfplumber
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
- 
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import euclidean_distances
 
 def read_pdf_with_pdfplumber(file):
     with pdfplumber.open(file) as pdf:
@@ -223,10 +224,11 @@ def cleartext(text):
 #similarity check between job description and resumes/cvs
 def check_similarity(CV_Clear, JD_Clear):
   Match_Test=[CV_Clear, JD_Clear]
-  cv=CountVectorizer()
-  count_matrix=cv.fit_transform(Match_Test)
+  #v=CountVectorizer()
+  v=TfidfVectorizer()
+  count_matrix=v.fit_transform(Match_Test)
   #print('Similarity is :',cosine_similarity(count_matrix))
-  MatchPercentage=cosine_similarity(count_matrix)[0][1]*100
+  MatchPercentage=euclidean_distances(count_matrix)[0][1]*100  #cosine_similarity(count_matrix)[0][1]*100
   MatchPercentage=round(MatchPercentage,2)
   #print('Match Percentage is :'+ str(MatchPercentage)+'% to Requirement')
   return MatchPercentage
