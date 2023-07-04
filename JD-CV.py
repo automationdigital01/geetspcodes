@@ -260,7 +260,7 @@ def main():
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
            
-           if (Match>80):
+           if (Match>90):
                match_file.append(cv_text)
                
                    
