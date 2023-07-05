@@ -269,6 +269,7 @@ def main():
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
         all_file.append(cv_file)
+        match_file.append(cv_text)
         match.append(Match)
     all_data.append({'File' : all_file,'Match Percent' : match})
     df_all=pd.DataFrame(all_data)
