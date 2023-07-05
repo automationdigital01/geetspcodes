@@ -279,7 +279,10 @@ def main():
     df_similarity.to_feather('df_similarity')
     st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
-        
+    df_final=df_similarity.append(df_model, ignore_index=True)
+    df_final=df_final.astype(str)
+    df_final.to_feather('df_final')   
+    st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
     csv = df_similarity.to_csv().encode('utf-8')
 
     st.download_button(label="Download data as CSV",
