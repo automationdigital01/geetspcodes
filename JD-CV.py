@@ -12,8 +12,8 @@ import seaborn as sns
 import pdfplumber
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import euclidean_distances
+
+
 
 def read_pdf_with_pdfplumber(file):
     with pdfplumber.open(file) as pdf:
@@ -225,11 +225,9 @@ def cleartext(text):
 #similarity check between job description and resumes/cvs
 def check_similarity(CV_Clear, JD_Clear):
   Match_Test=[CV_Clear, JD_Clear]
-  #v=CountVectorizer()
-  v=TfidfVectorizer()
+  v=CountVectorizer()
   count_matrix=v.fit_transform(Match_Test)
   #print('Similarity is :',cosine_similarity(count_matrix))
-  #MatchPercentage=euclidean_distances(count_matrix)[0][1]*100
   MatchPercentage=cosine_similarity(count_matrix)[0][1]*100
   MatchPercentage=round(MatchPercentage,2)
   #print('Match Percentage is :'+ str(MatchPercentage)+'% to Requirement')
@@ -267,27 +265,25 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
-        all_file.append(cv_file)
-        match_file.append(cv_text)
-        match.append(Match)
-    all_data.append({'File' : all_file,'Match Percent' : match})
-    df_all=pd.DataFrame(all_data)
+        gather_file.append(cv_text)
+        similarity_data.append({'File' : cv_file,'Match Percent' : Match})
+    
            #if (Match>95):
             #   match_file.append(cv_text)
                
-                   
-    df = predict(match_file, nlp)
-    df=df.astype(str)
-    df.to_feather('df')
+    df_similarity=pd.DataFrame(similarity_data)               
+    df_model = predict(gather_file, nlp)
+    df_model=df.astype(str)
+    df_model.to_feather('df_model')
 
        #st.write("Parsed Resumes:")
-    st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-    df_all=df_all.astype(str)
-    df_all.to_feather('df_all')
-    st.dataframe(df_all[["File","Match Percent"]])
+    st.dataframe(df_model[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+    df_similarity=df_similarity.astype(str)
+    df_similarity.to_feather('df_similarity')
+    st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
         
-    csv = df_all.to_csv().encode('utf-8')
+    csv = df_similarity.to_csv().encode('utf-8')
 
     st.download_button(label="Download data as CSV",
                         data=csv,
