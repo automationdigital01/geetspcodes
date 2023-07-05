@@ -105,10 +105,11 @@ def extract_skills(txt):
     
     return extracted_skills
 
-def predict(files, nlp):
+def predict(filepaths, nlp):
     entities_list = []
-    for file in files:
-        file_contants=file   
+
+    for filepath in filepaths:
+        file_contents=filepath
         #file_contents = filepath.decode('utf-8')
         email = None
         name = None
@@ -169,15 +170,15 @@ def predict(files, nlp):
 
         
 
-    entities_list.append({
-        "Email": email,
-        "Name": name,
-        "Roles": roles,
-        "Education": education,
-        "Phone Number": phone_number,
-        "Degree": degree,
-        "Skills": skills
-    })
+        entities_list.append({
+            "Email": email,
+            "Name": name,
+            "Roles": roles,
+            "Education": education,
+            "Phone Number": phone_number,
+            "Degree": degree,
+            "Skills": skills
+        })
 
     return pd.DataFrame(entities_list)
 
