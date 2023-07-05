@@ -283,7 +283,7 @@ def main():
     df_final=df_final.astype(str)
     df_final.to_feather('df_final')   
     st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
-    csv = df_similarity.to_csv().encode('utf-8')
+    csv = df_final.to_csv().encode('utf-8')
 
     st.download_button(label="Download data as CSV",
                         data=csv,
