@@ -282,17 +282,17 @@ def main():
 
        #st.write("Parsed Resumes:")
        #st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-       df_all=df_all.astype(str)
-       df_all.to_feather('df_all')
-       st.dataframe(df_all[["File","Match Percent"]])
+    df_all=df_all.astype(str)
+    df_all.to_feather('df_all')
+    st.dataframe(df_all[["File","Match Percent"]])
        #perform_education_analysis(df)
         
-       csv = df_all.to_csv().encode('utf-8')
+    csv = df_all.to_csv().encode('utf-8')
 
-       st.download_button(label="Download data as CSV",
-                           data=csv,
-                           file_name='cv_df.csv',
-                           mime='text/csv',)
+    st.download_button(label="Download data as CSV",
+                        data=csv,
+                        file_name='cv_df.csv',
+                        mime='text/csv',)
                                
   
 
