@@ -263,16 +263,15 @@ def main():
     
    result = st.button("Get result")
    if result is not None:
-       
-       for cv_file in cv_files:
-           cv_text= read_pdf_with_pdfplumber(cv_file)
-           cv_clear=cleartext(cv_text)
-           Match=check_similarity(cv_clear, jd_clear)
-           if Match>50:
-               all_file.append(cv_file)
-               match.append(Match)
-           all_data.append({'File' : all_file,'Match Percent' : match})
-           df_all=pd.DataFrame(all_data)
+    for cv_file in cv_files:
+        cv_text= read_pdf_with_pdfplumber(cv_file)
+        cv_clear=cleartext(cv_text)
+        Match=check_similarity(cv_clear, jd_clear)
+        if Match>50:
+            all_file.append(cv_file)
+            match.append(Match)
+    all_data.append({'File' : all_file,'Match Percent' : match})
+    df_all=pd.DataFrame(all_data)
            #if (Match>95):
             #   match_file.append(cv_text)
                
