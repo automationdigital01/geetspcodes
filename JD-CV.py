@@ -268,8 +268,9 @@ def main():
            Match=check_similarity(cv_clear, jd_clear)
            all_file.append(cv_file)
            match.append(Match)
-        all_match.append({'File' : all_file,'Match Percent' : match})
-        df_all=pd.DataFrame(all_match)
+           
+           all_data.append({'File' : all_file,'Match Percent' : match})
+           df_all=pd.DataFrame(all_data)
            #if (Match>95):
             #   match_file.append(cv_text)
                
@@ -285,7 +286,7 @@ def main():
        st.dataframe(df_all[["File","Match Percent"]])
        #perform_education_analysis(df)
         
-       csv = df.to_csv().encode('utf-8')
+       csv = df_all.to_csv().encode('utf-8')
 
        st.download_button(label="Download data as CSV",
                            data=csv,
