@@ -230,7 +230,7 @@ def check_similarity(CV_Clear, JD_Clear):
   count_matrix=v.fit_transform(Match_Test)
   #print('Similarity is :',cosine_similarity(count_matrix))
   #MatchPercentage=euclidean_distances(count_matrix)[0][1]*100
-  cosine_similarity(count_matrix)[0][1]*100
+  MatchPercentage=cosine_similarity(count_matrix)[0][1]*100
   MatchPercentage=round(MatchPercentage,2)
   #print('Match Percentage is :'+ str(MatchPercentage)+'% to Requirement')
   return MatchPercentage
