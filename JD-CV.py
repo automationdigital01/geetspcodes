@@ -229,7 +229,8 @@ def check_similarity(CV_Clear, JD_Clear):
   v=TfidfVectorizer()
   count_matrix=v.fit_transform(Match_Test)
   #print('Similarity is :',cosine_similarity(count_matrix))
-  MatchPercentage=euclidean_distances(count_matrix)[0][1]*100  #cosine_similarity(count_matrix)[0][1]*100
+  #MatchPercentage=euclidean_distances(count_matrix)[0][1]*100
+  cosine_similarity(count_matrix)[0][1]*100
   MatchPercentage=round(MatchPercentage,2)
   #print('Match Percentage is :'+ str(MatchPercentage)+'% to Requirement')
   return MatchPercentage
@@ -266,8 +267,9 @@ def main():
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
            Match=check_similarity(cv_clear, jd_clear)
-           all_file.append(cv_file)
-           match.append(Match)
+           if Match>50:
+               all_file.append(cv_file)
+               match.append(Match)
            
            all_data.append({'File' : all_file,'Match Percent' : match})
            df_all=pd.DataFrame(all_data)
