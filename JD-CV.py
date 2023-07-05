@@ -254,11 +254,8 @@ def main():
    jd_file=st.file_uploader("Choose the job description file",accept_multiple_files=False) 
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
-   match_file=[]
-   all_file=[]
-   match=[]
-   all_data=[]
-    
+   gather_file=[]
+   similarity_data=[] 
    result = st.button("Get result")
    if result is not None:
     for cv_file in cv_files:
