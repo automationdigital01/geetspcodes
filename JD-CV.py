@@ -267,21 +267,20 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
-        if Match>80:
-            all_file.append(cv_file)
-            match.append(Match)
+        all_file.append(cv_file)
+        match.append(Match)
     all_data.append({'File' : all_file,'Match Percent' : match})
     df_all=pd.DataFrame(all_data)
            #if (Match>95):
             #   match_file.append(cv_text)
                
                    
-       #df = predict(cv_text, nlp)
-       #df=df.astype(str)
-       #df.to_feather('df')
+    df = predict(cv_text, nlp)
+    df=df.astype(str)
+    df.to_feather('df')
 
        #st.write("Parsed Resumes:")
-       #st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+    st.dataframe(df[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
     df_all=df_all.astype(str)
     df_all.to_feather('df_all')
     st.dataframe(df_all[["File","Match Percent"]])
