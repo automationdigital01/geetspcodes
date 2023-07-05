@@ -267,7 +267,7 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
-        if Match>90:
+        if Match>80:
             all_file.append(cv_file)
             match.append(Match)
     all_data.append({'File' : all_file,'Match Percent' : match})
