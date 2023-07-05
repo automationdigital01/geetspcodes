@@ -262,12 +262,9 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
-        gather_file.append(cv_text)
-        similarity_data.append({'File' : cv_file,'Match Percent' : Match})
-    
-           #if (Match>95):
-            #   match_file.append(cv_text)
-               
+        if Match>80:
+            gather_file.append(cv_text)
+            similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
     df_similarity=pd.DataFrame(similarity_data)               
     df_model = predict(gather_file, nlp)
     df_model=df_model.astype(str)
@@ -279,7 +276,7 @@ def main():
     df_similarity.to_feather('df_similarity')
     st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
-    df_final=pd.concat([df_similarity,df_model],axis=1, ignore_index=True)
+    df_final=pd.concat([df_similarity,df_model], axis=1, ignore_index=True)
     df_final=df_final.astype(str)
     df_final.to_feather('df_final')   
     st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
