@@ -257,12 +257,13 @@ def main():
    jd_text=read_pdf_with_pdfplumber(jd_file)
    jd_clear=cleartext(jd_text)
    match_file=[]
+   all_file=[]
+   match=[]
+   all_data=[]
     
    result = st.button("Get result")
    if result is not None:
-       all_file=[]
-       match=[]
-       all_data=[]
+       
        for cv_file in cv_files:
            cv_text= read_pdf_with_pdfplumber(cv_file)
            cv_clear=cleartext(cv_text)
@@ -270,9 +271,8 @@ def main():
            if Match>50:
                all_file.append(cv_file)
                match.append(Match)
-           
-        all_data.append({'File' : all_file,'Match Percent' : match})
-        df_all=pd.DataFrame(all_data)
+           all_data.append({'File' : all_file,'Match Percent' : match})
+           df_all=pd.DataFrame(all_data)
            #if (Match>95):
             #   match_file.append(cv_text)
                
