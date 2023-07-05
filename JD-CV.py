@@ -270,7 +270,7 @@ def main():
                
     df_similarity=pd.DataFrame(similarity_data)               
     df_model = predict(gather_file, nlp)
-    df_model=df.astype(str)
+    df_model=df_model.astype(str)
     df_model.to_feather('df_model')
 
        #st.write("Parsed Resumes:")
