@@ -263,7 +263,7 @@ def main():
     for cv_file in cv_files:
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
-        Match=check_similarity(cv_clear, jd_clear)
+        Match=check_similarity(jd_clear, cv_clear)
         if Match>60:
             gather_file.append(cv_file)
             similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
