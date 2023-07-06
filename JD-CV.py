@@ -284,8 +284,8 @@ def main():
     
     st.download_button(label="Download data as CSV",
                         data=csv,
-                        file_name='cv_final.csv'
-                        mime='text/csv',)
+                        file_name='cv_final.csv',
+                        mime='text/csv')
                                
   
 
