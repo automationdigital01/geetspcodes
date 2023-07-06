@@ -264,7 +264,7 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(jd_clear, cv_clear)
-        if Match>60:
+        if Match>50:
             gather_file.append(cv_file)
             similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
     df_similarity=pd.DataFrame(similarity_data)               
