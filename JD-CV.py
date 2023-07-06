@@ -269,8 +269,11 @@ def main():
     df_similarity=pd.DataFrame(similarity_data)               
     df_model = predict(gather_file, nlp)
     #st.write("Parsed Resumes:")
+    df_model=df_model.astype(str)
+    df_model.to_feather('df_model')   
     st.dataframe(df_model[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
-    
+    df_similarity=df_similarity.astype(str)
+    df_similarity.to_feather('df_similarity')
     st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
     #df_final=pd.merge(df_similarity,df_model)
