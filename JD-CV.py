@@ -278,8 +278,10 @@ def main():
     #st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
     df_final=pd.merge(df_similarity,df_model)
-    df_final["Rank"]= df_final["Match Percent"].rank()
-    df_final.sort_values("Name", inplace = True)   
+    df_final = df_final.sort_values('Match Percent', ascending=False)
+    df_final['Rank'] = range(1, len(df) + 1)   
+    #df_final["Rank"]= df_final["Match Percent"].rank()
+    #df_final.sort_values("Name", inplace = True)   
     df_final=df_final.astype(str)
     df_final.to_feather('df_final')
  
