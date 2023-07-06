@@ -283,7 +283,7 @@ def main():
     df_final=df_final.astype(str)
     df_final.reset_index().to_feather('df_final')
  
-    st.dataframe(df_final[["File","Rank","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
+    st.dataframe(df_final[["File","Rank","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
     csv_final = df_final.to_csv().encode('utf-8')
     
     st.download_button(label="Download data as CSV",
