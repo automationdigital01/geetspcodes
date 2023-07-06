@@ -276,15 +276,16 @@ def main():
     df_similarity.to_feather('df_similarity')
     st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
-    df_final=pd.concat([df_similarity,df_model], axis=1, ignore_index=True)
-    df_final=df_final.astype(str)
-    df_final.to_feather('df_final')   
-    st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
-    csv = df_final.to_csv().encode('utf-8')
+    #df_final=pd.concat([df_similarity,df_model], axis=1, ignore_index=True)
+    #df_final=df_final.astype(str)
+    #df_final.to_feather('df_final')   
+    #st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
+    csv_sim = df_similarity.to_csv().encode('utf-8')
+    csv_model = df_model.to_csv().encode('utf-8')
 
     st.download_button(label="Download data as CSV",
-                        data=csv,
-                        file_name='cv_df.csv',
+                        data1=csv_sim, data2=csv_model,
+                        file_name1='cv_sim.csv', file_name2='cv_model.csv'
                         mime='text/csv',)
                                
   
