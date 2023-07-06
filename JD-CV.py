@@ -108,8 +108,9 @@ def extract_skills(txt):
 def predict(filepaths, nlp):
     entities_list = []
     for filepath in filepaths:
-        file_contents=filepath
+        file_contents=read_pdf_with_pdfplumber(filepath)
         #file_contents = filepath.decode('utf-8')
+        file=filepath
         email = None
         name = None
         roles = None
@@ -170,6 +171,7 @@ def predict(filepaths, nlp):
         
 
         entities_list.append({
+            "File": file,
             "Email": email,
             "Name": name,
             "Roles": roles,
@@ -263,7 +265,7 @@ def main():
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
         if Match>80:
-            gather_file.append(cv_text)
+            gather_file.append(cv_file)
             similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
     df_similarity=pd.DataFrame(similarity_data)               
     df_model = predict(gather_file, nlp)
