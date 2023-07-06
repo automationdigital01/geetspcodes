@@ -264,20 +264,19 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
-        if Match>80:
-            gather_file.append(cv_file)
-            similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
+        gather_file.append(cv_file)
+        similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
     df_similarity=pd.DataFrame(similarity_data)               
     df_model = predict(gather_file, nlp)
     #st.write("Parsed Resumes:")
-    #st.dataframe(df_model[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+    st.dataframe(df_model[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
     
-    #st.dataframe(df_similarity[["File","Match Percent"]])
+    st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
-    df_final=pd.merge(df_similarity,df_model)
+    #df_final=pd.merge(df_similarity,df_model)
        
-    st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
-    csv_final = df_final.to_csv().encode('utf-8')
+    #st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
+    #csv_final = df_final.to_csv().encode('utf-8')
     
     st.download_button(label="Download data as CSV",
                         data=csv,
