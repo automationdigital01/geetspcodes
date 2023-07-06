@@ -5,6 +5,7 @@ import zipfile
 import pandas as pd
 import re
 import nltk
+import pickle
 from nltk import ne_chunk, pos_tag, word_tokenize, download
 from spacy.matcher import PhraseMatcher
 import matplotlib.pyplot as plt
@@ -268,17 +269,17 @@ def main():
     df_similarity=pd.DataFrame(similarity_data)               
     df_model = predict(gather_file, nlp)
     df_model=df_model.astype(str)
-    df_model.to_feather('df_model')
+    df_model.to_pickle('df_model')
 
        #st.write("Parsed Resumes:")
     st.dataframe(df_model[["Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
     df_similarity=df_similarity.astype(str)
-    df_similarity.to_feather('df_similarity')
+    df_similarity.to_pickle('df_similarity')
     st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
     df_final=pd.merge(df_similarity,df_model)
     df_final=df_final.astype(str)
-    df_final.to_feather('df_final')   
+    df_final.to_pickle('df_final')   
     st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
     csv_final = df_final.to_csv().encode('utf-8')
     
