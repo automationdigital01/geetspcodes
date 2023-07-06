@@ -264,7 +264,7 @@ def main():
         cv_text= read_pdf_with_pdfplumber(cv_file)
         cv_clear=cleartext(cv_text)
         Match=check_similarity(cv_clear, jd_clear)
-        if Match>50:
+        if Match>80:
             gather_file.append(cv_file)
             similarity_data.append({'File' : cv_file,'Match Percent' : Match})    
     df_similarity=pd.DataFrame(similarity_data)               
@@ -272,10 +272,10 @@ def main():
     #st.write("Parsed Resumes:")
     df_model=df_model.astype(str)
     df_model.to_feather('df_model')   
-    st.dataframe(df_model[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
+    #st.dataframe(df_model[["File", "Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])
     df_similarity=df_similarity.astype(str)
     df_similarity.to_feather('df_similarity')
-    st.dataframe(df_similarity[["File","Match Percent"]])
+    #st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
     df_final=pd.merge(df_similarity,df_model)
     df_final=df_final.astype(str)
