@@ -282,7 +282,7 @@ def main():
     
     #df_final.sort_values("Name", inplace = True)   
     df_final=df_final.astype(str)
-    df_final.to_feather('df_final')
+    df_final.reset_index().to_feather('df_final')
  
     st.dataframe(df_final[["File","Rank","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
     csv_final = df_final.to_csv().encode('utf-8')
