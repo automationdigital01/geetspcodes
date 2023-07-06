@@ -277,14 +277,14 @@ def main():
     #st.dataframe(df_similarity[["File","Match Percent"]])
        #perform_education_analysis(df)
     df_final=pd.merge(df_similarity,df_model)
-    #df_final = df_final.sort_values('Match Percent', ascending=False)
-    #df_final['Rank'] = range(1, len(df_final) + 1)   
-    #df_final["Rank"]= df_final["Match Percent"].rank()
+    df_final = df_final.sort_values('Match Percent', ascending=False)
+    df_final['Rank'] = range(1, len(df_final) + 1)   
+    
     #df_final.sort_values("Name", inplace = True)   
     df_final=df_final.astype(str)
     df_final.to_feather('df_final')
  
-    st.dataframe(df_final[["File","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
+    st.dataframe(df_final[["File","Rank","Match Percent","Email", "Name", "Roles", "Education", "Phone Number", "Degree", "Skills"]])   
     csv_final = df_final.to_csv().encode('utf-8')
     
     st.download_button(label="Download data as CSV",
