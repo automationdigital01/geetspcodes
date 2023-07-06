@@ -284,7 +284,7 @@ def main():
     csv_final = df_final.to_csv().encode('utf-8')
     
     st.download_button(label="Download data as CSV",
-                        data=csv,
+                        data=csv_final,
                         file_name='cv_final.csv',
                         mime='text/csv')
                                
