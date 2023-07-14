@@ -10,4 +10,6 @@ PyPDF2
 pdfplumber
 scikit-learn==1.2.2
 pyarrow
-
+pytesseract
+cv2
+PIL
